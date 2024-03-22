@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 // Using @JsonCreator, @JsonProperty("name") during deserialization
+// Using @JsonGetter("name") during serialization
 // https://www.baeldung.com/jackson-annotations#bd-jackson-deserialization-annotations
 public class MovieItem
 {

@@ -36,4 +36,9 @@ public class Connect
 
         System.out.println("Users:[Connect.SendData] Innerconnect response=" + result);
     }
+
+    public void GetData()
+    {
+        String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
+    }
 }
