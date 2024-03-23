@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // Port=8080 - set in application.properties.
 // try-catch => https://www.w3schools.com/java/java_try_catch.asp
+// Use for testing => '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","role":"User","Cmd":"getAll","DestSrv":"UserSrv"}'
 @RestController
 public class IndexRestController
 {

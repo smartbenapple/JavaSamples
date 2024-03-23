@@ -15,7 +15,7 @@ public class Connect
     public void SendData(InnerConnectMessage innerConnectMessage)
     {
         String url = "https://gcloud-innerconnect-axxh6chama-wl.a.run.app/sendme";
-        String url2 = "http://localhost:8282/sendme";
+        String url2 = "http://localhost:8181/sendme";
 
         RestClient rest = RestClient.create();
 
@@ -26,7 +26,7 @@ public class Connect
         headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
 
         String result = String.valueOf(rest.post()
-                .uri(url)
+                .uri(url2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)

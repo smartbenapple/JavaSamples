@@ -7,7 +7,7 @@ import org.springframework.web.client.RestClient;
 
 import java.util.*;
 
-public class Innerconnect
+public class Innerconnect implements Runnable
 {
     ArrayList<InnerConnectMessage> items = new ArrayList<InnerConnectMessage>();
 
@@ -23,7 +23,25 @@ public class Innerconnect
     {
         System.out.println("IC:[Innerconnect.SendData] Start = ");
 
-        String url = "https://" + innerConnectMessage.get_host() + ":" + innerConnectMessage.get_port() + innerConnectMessage.get_path();
+        // Threads
+        // https://www.w3schools.com/java/java_threads.asp
+        // https://www.geeksforgeeks.org/asynchronous-synchronous-callbacks-java/
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                RunSendData(innerConnectMessage);
+            }
+        }).start();
+
+        System.out.println("Users:[Connect.SendData] Innerconnect exit.");
+    }
+
+    private void RunSendData(InnerConnectMessage innerConnectMessage)
+    {
+        String port = innerConnectMessage.get_port().isEmpty() ? "" : innerConnectMessage.get_port();
+        String url = "https://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
 
         RestClient rest = RestClient.create();
 
@@ -33,6 +51,7 @@ public class Innerconnect
         headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
         headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
 
+        // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -42,7 +61,6 @@ public class Innerconnect
                 .retrieve()
                 .toBodilessEntity());
 
-        System.out.println("Users:[Connect.SendData] Innerconnect response=" + result);
     }
 
     public void WatchQueues()
@@ -81,5 +99,11 @@ public class Innerconnect
                     break;
             }
         }
+    }
+
+    @Override
+    public void run()
+    {
+
     }
 }
