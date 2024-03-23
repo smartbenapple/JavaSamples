@@ -6,10 +6,20 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Innerconnect implements Runnable
+public class Innerconnect
 {
+    // Atomic Thread-Safe value-types
+    // https://www.tutorialspoint.com/java_concurrency/concurrency_atomicboolean.htm
+    AtomicBoolean safeBool = new AtomicBoolean(false);
+
     ArrayList<InnerConnectMessage> items = new ArrayList<InnerConnectMessage>();
+
+    public Innerconnect()
+    {
+        WatchAtomic();
+    }
 
     public String AddData(InnerConnectMessage innerConnectMessage)
     {
@@ -23,6 +33,9 @@ public class Innerconnect implements Runnable
     {
         System.out.println("IC:[Innerconnect.SendData] Start = ");
 
+        // reset Atomic value
+        safeBool.set(false);
+
         // Threads
         // https://www.w3schools.com/java/java_threads.asp
         // https://www.geeksforgeeks.org/asynchronous-synchronous-callbacks-java/
@@ -32,6 +45,7 @@ public class Innerconnect implements Runnable
             public void run()
             {
                 RunSendData(innerConnectMessage);
+                safeBool.set(true);
             }
         }).start();
 
@@ -101,9 +115,28 @@ public class Innerconnect implements Runnable
         }
     }
 
-    @Override
-    public void run()
+    public void WatchAtomic()
     {
-
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while(true)
+                {
+                    try
+                    {
+                        if (safeBool.get() == true)
+                        {
+                            System.out.println("The Atomic Boolean switch to 'true'.");
+                            return;
+                        }
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }).start();
     }
 }
