@@ -11,6 +11,21 @@ public class InnerConnectMessage
     private String _path = "";
     private apiMessage _apiMessage; // todo: change String to apiMessage type.
 
+    public void set_host(String value)
+    {
+        _host = value;
+    }
+
+    public void set_port(String value)
+    {
+        _port = value;
+    }
+
+    public void set_path(String value)
+    {
+        _path = value;
+    }
+
     @JsonGetter("Host")
     public String get_host()
     {
