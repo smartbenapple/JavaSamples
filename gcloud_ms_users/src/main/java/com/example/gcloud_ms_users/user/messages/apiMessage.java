@@ -1,4 +1,4 @@
-package com.example.gcloud_ms_users.user;
+package com.example.gcloud_ms_users.user.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;

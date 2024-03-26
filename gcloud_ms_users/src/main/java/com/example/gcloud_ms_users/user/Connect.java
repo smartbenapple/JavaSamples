@@ -1,10 +1,9 @@
 package com.example.gcloud_ms_users.user;
 
+import com.example.gcloud_ms_users.user.messages.IcMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
-
-import java.nio.Buffer;
 
 public class Connect
 {
@@ -12,10 +11,10 @@ public class Connect
 
     // Springs: RestClient
     // https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
-    public void SendData(InnerConnectMessage innerConnectMessage)
+    public void GetUsersData(IcMessage icMessage)
     {
-        String url = "https://gcloud-innerconnect-axxh6chama-wl.a.run.app/sendme";
-        String url2 = "http://localhost:8181/sendme";
+        String url = "???";
+        String url2 = "http://localhost:8282/users";
 
         RestClient rest = RestClient.create();
 
@@ -25,12 +24,14 @@ public class Connect
         headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
         headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
 
+        // Expect to receive: {"message":"success"}
+        // Firebase NodeJs service will send answer directly to innerconnect.
         String result = String.valueOf(rest.post()
                 .uri(url2)
-                .contentType(MediaType.APPLICATION_JSON)
+                //.contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)
-                .body(innerConnectMessage)
+                .body(icMessage)
                 .retrieve()
                 .toBodilessEntity());
 

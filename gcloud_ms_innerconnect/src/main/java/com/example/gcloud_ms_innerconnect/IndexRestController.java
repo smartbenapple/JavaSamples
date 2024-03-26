@@ -1,6 +1,9 @@
 package com.example.gcloud_ms_innerconnect;
 
-import com.example.gcloud_ms_users.user.InnerConnectMessage;
+import com.example.gcloud_ms_users.user.adapters.Adp_UFM_ICM;
+import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
+import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,8 +21,16 @@ public class IndexRestController
     }
 
     @PostMapping("/sendme") // in: path
-    public String AddData(@RequestBody InnerConnectMessage innerConnectMessage)
+    public String AddData(@RequestBody IcMessage icMessage)
     {
-        return connect.AddData(innerConnectMessage);
+        return connect.AddData(icMessage);
+    }
+
+    // Expect to receive: {"id":"", "destSrv":"","data":"[{"password":"...","username":"..."}]"}
+    @PostMapping("/useranswer")
+    public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
+    {
+        Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);
+        return connect.AddData(adapter.Output());
     }
 }

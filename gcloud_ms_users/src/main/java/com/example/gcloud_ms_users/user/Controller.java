@@ -1,8 +1,6 @@
 package com.example.gcloud_ms_users.user;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import com.example.gcloud_ms_users.user.Connect;
+import com.example.gcloud_ms_users.user.messages.IcMessage;
 
 // System.out.println() => https://www.baeldung.com/java-system-out-println-vs-loggers
 public class Controller
@@ -15,36 +13,39 @@ public class Controller
         //       The Java version creates the class during deserialization process.
     }
 
-    public void ProcessAction(InnerConnectMessage innerConnectMessage)
+    public void ProcessAction(IcMessage icMessage)
     {
-        System.out.println("Users:[Controller.ProcessAction] Triggered. Host=" + innerConnectMessage.get_host());
+        System.out.println("Users:[Controller.ProcessAction] Triggered. Host=" + icMessage.get_host());
 
-        String cmd = innerConnectMessage.get_apiMessage().get_cmd();
+        String cmd = icMessage.get_apiMessage().get_cmd();
         switch (cmd)
         {
             case "getAll":
                 System.out.println("Users:[Controller.ProcessAction] getAll found.");
-                getAllAction(innerConnectMessage);
+                getAllAction(icMessage);
                 break;
             case "create":
                 System.out.println("Users:[Controller.ProcessAction] create found.");
-                CreateAction(innerConnectMessage);
+                CreateAction(icMessage);
                 break;
             default:
                 break;
         }
     }
 
-    public void getAllAction(InnerConnectMessage innerConnectMessage)
+    public void getAllAction(IcMessage icMessage)
     {
         // todo: get users data from the NodeJs endpoint
-        // todo: requires a userModel class.
-        connect.SendData(innerConnectMessage);
+        // todo: requires a userModel class?
+        // '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","Role":"user","Cmd":"getAll","DestSrv":"UserSrv"}'
+        // Talking to firebase requires 'Cmd' portion.
+        connect.GetUsersData(icMessage);
     }
 
-    public void CreateAction(InnerConnectMessage innerConnectMessage)
+    public void CreateAction(IcMessage icMessage)
     {
         // todo: create new user data from the NodeJs endpoint.
-        connect.SendData(innerConnectMessage);
+        // '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","Role":"user","Cmd":"getAll","DestSrv":"UserSrv"}'
+        //connect.SendData(innerConnectMessage);
     }
 }

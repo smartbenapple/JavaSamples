@@ -1,6 +1,6 @@
 package com.example.gcloud_ms_innerconnect;
 
-import com.example.gcloud_ms_users.user.InnerConnectMessage;
+import com.example.gcloud_ms_users.user.messages.IcMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
@@ -14,14 +14,14 @@ public class Innerconnect
     // https://www.tutorialspoint.com/java_concurrency/concurrency_atomicboolean.htm
     AtomicBoolean safeBool = new AtomicBoolean(false);
 
-    ArrayList<InnerConnectMessage> items = new ArrayList<InnerConnectMessage>();
+    ArrayList<IcMessage> items = new ArrayList<IcMessage>();
 
     public Innerconnect()
     {
         WatchAtomic();
     }
 
-    public String AddData(InnerConnectMessage innerConnectMessage)
+    public String AddData(IcMessage innerConnectMessage)
     {
         System.out.println("IC:[Innerconnect.AddData] Start = " + innerConnectMessage.toString());
         items.add(innerConnectMessage);
@@ -29,7 +29,7 @@ public class Innerconnect
         return "IC:[Innerconnect.AddData] Add Data Success.";
     }
 
-    public void SendData(InnerConnectMessage innerConnectMessage)
+    public void SendData(IcMessage innerConnectMessage)
     {
         System.out.println("IC:[Innerconnect.SendData] Start = ");
 
@@ -52,7 +52,7 @@ public class Innerconnect
         System.out.println("Users:[Connect.SendData] Innerconnect exit.");
     }
 
-    private void RunSendData(InnerConnectMessage innerConnectMessage)
+    private void RunSendData(IcMessage innerConnectMessage)
     {
         String port = innerConnectMessage.get_port().isEmpty() ? "" : innerConnectMessage.get_port();
         String url = "https://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
@@ -85,7 +85,7 @@ public class Innerconnect
         if (items.size() > 0)
         {
             // if true, then pop off item and send to destination.
-            InnerConnectMessage item = items.get(0);
+            IcMessage item = items.get(0);
 
             // Check destination
             switch (item.get_destSrv())

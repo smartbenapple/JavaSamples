@@ -1,7 +1,7 @@
 package com.example.gcloud_ms_users;
 
 import com.example.gcloud_ms_users.user.Controller;
-import com.example.gcloud_ms_users.user.InnerConnectMessage;
+import com.example.gcloud_ms_users.user.messages.IcMessage;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +16,12 @@ public class IndexRestController
     Controller ctrl = new Controller();
 
     @PostMapping("/users") // in: maps path
-    public String ProcessAction(@RequestBody InnerConnectMessage innerConnectMessage)
+    public String ProcessAction(@RequestBody IcMessage icMessage)
     {
         try
         {
             //ctrl.CreateMessage();
-            ctrl.ProcessAction(innerConnectMessage);
+            ctrl.ProcessAction(icMessage);
         }
         catch(Exception e)
         {
