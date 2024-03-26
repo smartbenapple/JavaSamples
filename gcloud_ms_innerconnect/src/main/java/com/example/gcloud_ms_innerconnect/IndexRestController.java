@@ -1,8 +1,8 @@
 package com.example.gcloud_ms_innerconnect;
 
+import com.example.gcloud_ms_movies.adapters.Adp_MFM_ICM;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.adapters.Adp_UFM_ICM;
-import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +40,7 @@ public class IndexRestController
     public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage)
     {
         // todo: requires an IcMoviesMessage class and adapter.
-        //Adp_UFM_ICM adapter = new Adp_UFM_ICM(moviesFirebaseMessage);
-        //return connect.AddData(adapter.Output());
-        return "Success";
+        Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
+        return connect.AddData(adapter.Output());
     }
 }
