@@ -14,7 +14,7 @@ public class Connect
     // https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
     public void GetUsersData(IcMessage icMessage)
     {
-        System.out.println("Users:[Connect.GetUsersData] Innerconnect start...");
+        System.out.println("Users:[Connect.GetUsersData] Start...");
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
         String url2 = "http://localhost:8282/users";
@@ -38,12 +38,12 @@ public class Connect
                 .retrieve()
                 .toBodilessEntity());
 
-        System.out.println("Users:[Connect.GetUsersData] Innerconnect response=" + result);
+        System.out.println("Users:[Connect.GetUsersData] Response=" + result);
     }
 
     public void CreateUser(IcNewUsrMessage icNewUsrMessage)
     {
-        System.out.println("Users:[Connect.CreateUser] Innerconnect start...");
+        System.out.println("Users:[Connect.CreateUser] Start...");
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
         String url2 = "http://localhost:8282/users";
@@ -67,6 +67,6 @@ public class Connect
                 .retrieve()
                 .toBodilessEntity());
 
-        System.out.println("Users:[Connect.CreateUser] Innerconnect response=" + result);
+        System.out.println("Users:[Connect.CreateUser] Response=" + result);
     }
 }

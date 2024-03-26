@@ -26,19 +26,19 @@ public class IcMessage
         _path = value;
     }
 
-    @JsonGetter("Host")
+    @JsonGetter("host")
     public String get_host()
     {
         return _host;
     }
 
-    @JsonGetter("Port")
+    @JsonGetter("port")
     public String get_port()
     {
         return _port;
     }
 
-    @JsonGetter("Path")
+    @JsonGetter("path")
     public String get_path()
     {
         return _path;
@@ -78,8 +78,8 @@ public class IcMessage
     }
 
     @JsonCreator
-    public IcMessage(@JsonProperty("Host") String host, @JsonProperty("Port") String port, @JsonProperty("Path") String path, @JsonProperty("Id") String id,
-                     @JsonProperty("Role") String role, @JsonProperty("Cmd") String cmd, @JsonProperty("DestSrv") String destSrv)
+    public IcMessage(@JsonProperty("host") String host, @JsonProperty("port") String port, @JsonProperty("path") String path, @JsonProperty("id") String id,
+                     @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv)
     {
         System.out.println("[InnerConnectMessage.ctr] Triggered");
 
