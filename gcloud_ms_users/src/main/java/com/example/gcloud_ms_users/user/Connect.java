@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_users.user;
 
 import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
@@ -13,7 +14,9 @@ public class Connect
     // https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
     public void GetUsersData(IcMessage icMessage)
     {
-        String url = "???";
+        System.out.println("Users:[Connect.GetUsersData] Innerconnect start...");
+
+        String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
         String url2 = "http://localhost:8282/users";
 
         RestClient rest = RestClient.create();
@@ -35,11 +38,35 @@ public class Connect
                 .retrieve()
                 .toBodilessEntity());
 
-        System.out.println("Users:[Connect.SendData] Innerconnect response=" + result);
+        System.out.println("Users:[Connect.GetUsersData] Innerconnect response=" + result);
     }
 
-    public void GetData()
+    public void CreateUser(IcNewUsrMessage icNewUsrMessage)
     {
+        System.out.println("Users:[Connect.CreateUser] Innerconnect start...");
+
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
+        String url2 = "http://localhost:8282/users";
+
+        RestClient rest = RestClient.create();
+
+        // Failed: Test creating headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin","*");
+        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+
+        // Expect to receive: {"message":"success"}
+        // Firebase NodeJs service will send answer directly to innerconnect.
+        String result = String.valueOf(rest.post()
+                .uri(url2)
+                //.contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                //.headers((Consumer<HttpHeaders>) headers)
+                .body(icNewUsrMessage)
+                .retrieve()
+                .toBodilessEntity());
+
+        System.out.println("Users:[Connect.CreateUser] Innerconnect response=" + result);
     }
 }

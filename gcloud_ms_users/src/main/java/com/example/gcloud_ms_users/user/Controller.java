@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_users.user;
 
 import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 
 // System.out.println() => https://www.baeldung.com/java-system-out-println-vs-loggers
 public class Controller
@@ -26,7 +27,7 @@ public class Controller
                 break;
             case "create":
                 System.out.println("Users:[Controller.ProcessAction] create found.");
-                CreateAction(icMessage);
+                CreateAction((IcNewUsrMessage) icMessage);
                 break;
             default:
                 break;
@@ -35,17 +36,15 @@ public class Controller
 
     public void getAllAction(IcMessage icMessage)
     {
-        // todo: get users data from the NodeJs endpoint
-        // todo: requires a userModel class?
         // '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","Role":"user","Cmd":"getAll","DestSrv":"UserSrv"}'
         // Talking to firebase requires 'Cmd' portion.
         connect.GetUsersData(icMessage);
     }
 
-    public void CreateAction(IcMessage icMessage)
+    public void CreateAction(IcNewUsrMessage icNewUsrMessage)
     {
-        // todo: create new user data from the NodeJs endpoint.
         // '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","Role":"user","Cmd":"getAll","DestSrv":"UserSrv"}'
+        connect.CreateUser(icNewUsrMessage);
         //connect.SendData(innerConnectMessage);
     }
 }
