@@ -21,7 +21,7 @@ public class Controller
                 break;
             case "create":
                 System.out.println("Movies:[Controller.ProcessAction] create found.");
-                CreateAction((IcNewMovieMessage) icMessage); // todo: why is IcMessage from the wire going to cast up? - test please.
+                CreateAction((IcNewMovieMessage) icMessage);
                 break;
             default:
                 break;
@@ -44,6 +44,16 @@ public class Controller
 
     public void CreateAction(IcNewMovieMessage icNewMovieMessage)
     {
-
+        try
+        {
+            System.out.println("Movies[Controller.CreateAction] Start");
+            connect.CreateMovie(icNewMovieMessage);
+            System.out.println("Movies[Controller.CreateAction] Finish");
+        }
+        catch(Exception e)
+        {
+            // return 500 error message.
+            System.out.println("Movies:[Controller.CreateAction] Error.");
+        }
     }
 }

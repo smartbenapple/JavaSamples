@@ -7,12 +7,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class IcNewMovieMessage extends IcMessage
 {
-    private MovieMessage _movieMessage;
+    private MovieMessage _movieMessage = new MovieMessage("new?","new?");
 
     @JsonGetter("data")
     public MovieMessage get_movieMessage()
     {
         return _movieMessage;
+    }
+
+    @JsonGetter("title")
+    public String getTitle()
+    {
+        return _movieMessage.get_title();
+    }
+
+    @JsonGetter("year")
+    public String getYear()
+    {
+        return _movieMessage.get_year();
     }
 
     @JsonCreator

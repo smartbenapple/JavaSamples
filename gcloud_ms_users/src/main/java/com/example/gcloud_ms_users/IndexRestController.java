@@ -32,7 +32,7 @@ public class IndexRestController
         return "Post Users Worked.";
     }
 
-    @PostMapping("/usercreate") // in: maps path
+    @PostMapping("/userCreate") // in: maps path
     public String ProcessCreate(@RequestBody IcNewUsrMessage icNewUsrMessage)
     {
         try

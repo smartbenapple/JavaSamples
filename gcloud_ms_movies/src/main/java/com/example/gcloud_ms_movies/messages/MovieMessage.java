@@ -9,13 +9,13 @@ public class MovieMessage
     private String _title;
     private String _year;
 
-    @JsonGetter("Title")
+    @JsonGetter("title")
     public String get_title()
     {
         return _title;
     }
 
-    @JsonGetter("Year")
+    @JsonGetter("year")
     public String get_year()
     {
         return _year;

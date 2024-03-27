@@ -95,14 +95,14 @@ public class Innerconnect
                     System.out.println("IC:[Innerconnect.watchQueues] MovieSrv");
                     item.set_host("localhost"); // gcloud-ms-movies-axxh6chama-wl.a.run.app
                     item.set_port("8081");
-                    item.set_path("/movies");
+                    item.set_path(Objects.equals(item.get_cmd(), "create") ? "/movieCreate" : "/movies");
                     SendData(item);
                     break;
                 case "UserSrv": // Send to Java User service
                     System.out.println("IC:[Innerconnect.watchQueues] UserSrv");
                     item.set_host("localhost"); // gcloud-ms-users-axxh6chama-wl.a.run.app
                     item.set_port("8082");
-                    item.set_path(Objects.equals(item.get_cmd(), "create") ? "/usercreate" : "/users");
+                    item.set_path(Objects.equals(item.get_cmd(), "create") ? "/userCreate" : "/users");
                     SendData(item);
                     break;
                 case "ApiSrv": // Send to API service

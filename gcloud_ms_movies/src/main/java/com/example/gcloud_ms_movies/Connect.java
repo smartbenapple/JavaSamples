@@ -79,6 +79,7 @@ public class Connect
         System.out.println("Movies:[Connect.SendData] Result=" + result);
     }
 
+    // Sends to movies_firebase service.
     public void CreateMovie(IcNewMovieMessage icNewMovieMessage)
     {
         System.out.println("Movies:[Connect.CreateMovie] Start");
