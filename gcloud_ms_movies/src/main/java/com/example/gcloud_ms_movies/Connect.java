@@ -55,13 +55,13 @@ public class Connect
         return data;
     }
 
-    // Sends to innerconnect service
+    // Sends to movies_firebase service.
     public void SendMovies(MoviesFirebaseMessage moviesFirebaseMessage)
     {
         System.out.println("Movies:[Connect.SendData] Start");
 
         String port = "";
-        String url = "http://localhost:8181/movieanswer";
+        String url2 = "http://localhost:8383/movies";
 
         RestClient rest = RestClient.create();
 
@@ -73,7 +73,7 @@ public class Connect
 
         // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
-                .uri(url)
+                .uri(url2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)

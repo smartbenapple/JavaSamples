@@ -86,25 +86,26 @@ public class Innerconnect
         {
             // if true, then pop off item and send to destination.
             IcMessage item = items.get(0);
+            items.remove(item); // remove from array
 
             // Check destination
             switch (item.get_destSrv())
             {
-                case "MovieSrv":
+                case "MovieSrv": // Send to Java Movie service
                     System.out.println("IC:[Innerconnect.watchQueues] MovieSrv");
                     item.set_host("localhost"); // gcloud-ms-movies-axxh6chama-wl.a.run.app
-                    item.set_port("8383");
+                    item.set_port("8081");
                     item.set_path("/movies");
                     SendData(item);
                     break;
-                case "UserSrv":
+                case "UserSrv": // Send to Java User service
                     System.out.println("IC:[Innerconnect.watchQueues] UserSrv");
                     item.set_host("localhost"); // gcloud-ms-users-axxh6chama-wl.a.run.app
-                    item.set_port("8080");
+                    item.set_port("8082");
                     item.set_path("/users");
                     SendData(item);
                     break;
-                case "ApiSrv":
+                case "ApiSrv": // Send to API service
                     System.out.println("IC:[Innerconnect.watchQueues] ApiSrv");
                     item.set_host("gcloud-ms-api-axxh6chama-wl.a.run.app");
                     item.set_port("");

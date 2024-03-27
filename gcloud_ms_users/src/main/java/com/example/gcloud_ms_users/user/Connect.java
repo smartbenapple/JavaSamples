@@ -6,18 +6,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
+// Springs: RestClient
+// https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
 public class Connect
 {
     public Connect() {}
 
-    // Springs: RestClient
-    // https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+    // Send request to Users_Firebase service.
     public void GetUsersData(IcMessage icMessage)
     {
         System.out.println("Users:[Connect.GetUsersData] Start...");
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8282/users";
+        String url2 = "http://localhost:8283/users";
 
         RestClient rest = RestClient.create();
 
@@ -41,12 +42,13 @@ public class Connect
         System.out.println("Users:[Connect.GetUsersData] Response=" + result);
     }
 
+    // Send request to Users_Firebase service.
     public void CreateUser(IcNewUsrMessage icNewUsrMessage)
     {
         System.out.println("Users:[Connect.CreateUser] Start...");
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8282/users";
+        String url2 = "http://localhost:8283/users";
 
         RestClient rest = RestClient.create();
 

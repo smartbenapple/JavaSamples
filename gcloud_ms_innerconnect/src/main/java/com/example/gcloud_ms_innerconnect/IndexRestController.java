@@ -46,8 +46,7 @@ public class IndexRestController
     @PostMapping("/moviesAnswer")
     public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
-       // Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
-        //return connect.AddData(adapter.Output());
-        return "hello=" + moviesFirebaseMessage;
+        Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
+        return connect.AddData(adapter.Output());
     }
 }
