@@ -9,7 +9,8 @@ public class Model
 
     public void GetAll()
     {
-        apiMessage message = new apiMessage("{uuid?}","user","getAll","UserSrv"); // todo: research uuid equivalent
+        // Note: Set id as blank to trigger automatic UUID internally.
+        apiMessage message = new apiMessage("","user","getAll","UserSrv"); // todo: research uuid equivalent
 
         String output = OMHelper.Parse(message);
         System.out.println("API[Model.GetAll] message=" + output);

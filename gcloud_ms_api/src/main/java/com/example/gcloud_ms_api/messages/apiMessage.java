@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
+// Java's UUID
+// https://www.baeldung.com/java-uuid
 public class apiMessage
 {
     private String _id;
@@ -38,7 +42,11 @@ public class apiMessage
     @JsonCreator
     public apiMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv)
     {
-        _id = id;
+        // Create UUID
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString();
+
+        _id = id.isEmpty() ? uuidString : id;
         _role = role;
         _cmd = cmd;
         _destSrv = destSrv;
