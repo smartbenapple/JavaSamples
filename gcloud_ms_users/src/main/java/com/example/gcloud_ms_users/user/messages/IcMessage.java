@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_users.user.messages;
 
+import com.example.gcloud_ms_api.messages.apiMessage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +10,7 @@ public class IcMessage
     private String _host = "";
     private String _port = "";
     private String _path = "";
-    private apiMessage _apiMessage; // todo: change String to apiMessage type.
+    private apiMessage _apiMessage;
 
     public void set_host(String value)
     {
