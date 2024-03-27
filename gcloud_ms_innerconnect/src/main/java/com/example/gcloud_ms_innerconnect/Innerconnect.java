@@ -54,8 +54,8 @@ public class Innerconnect
 
     private void RunSendData(IcMessage innerConnectMessage)
     {
-        String port = innerConnectMessage.get_port().isEmpty() ? "" : innerConnectMessage.get_port();
-        String url = "https://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
+        String port = innerConnectMessage.get_port().isEmpty() ? "" : ":" + innerConnectMessage.get_port();
+        String url = "http://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
 
         RestClient rest = RestClient.create();
 
@@ -92,15 +92,15 @@ public class Innerconnect
             {
                 case "MovieSrv":
                     System.out.println("IC:[Innerconnect.watchQueues] MovieSrv");
-                    item.set_host("gcloud-ms-movies-axxh6chama-wl.a.run.app");
-                    item.set_port("");
-                    item.set_path("/movie");
+                    item.set_host("localhost"); // gcloud-ms-movies-axxh6chama-wl.a.run.app
+                    item.set_port("8383");
+                    item.set_path("/movies");
                     SendData(item);
                     break;
                 case "UserSrv":
                     System.out.println("IC:[Innerconnect.watchQueues] UserSrv");
-                    item.set_host("gcloud-ms-users-axxh6chama-wl.a.run.app");
-                    item.set_port("");
+                    item.set_host("localhost"); // gcloud-ms-users-axxh6chama-wl.a.run.app
+                    item.set_port("8080");
                     item.set_path("/users");
                     SendData(item);
                     break;

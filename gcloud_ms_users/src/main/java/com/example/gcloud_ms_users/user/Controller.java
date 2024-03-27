@@ -27,7 +27,7 @@ public class Controller
                 break;
             case "create":
                 System.out.println("Users:[Controller.ProcessAction] create found.");
-                CreateAction((IcNewUsrMessage) icMessage);
+                CreateAction((IcNewUsrMessage) icMessage); // todo: why is IcMessage from the wire going to cast up? - test please.
                 break;
             default:
                 break;

@@ -1,0 +1,24 @@
+package com.example.gcloud_ms_movies.messages;
+
+import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class IcNewMovieMessage extends IcMessage
+{
+    private MovieMessage _movieMessage;
+
+    @JsonGetter("data")
+    public MovieMessage get_movieMessage()
+    {
+        return _movieMessage;
+    }
+
+    @JsonCreator
+    public IcNewMovieMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("title") String title, @JsonProperty("year") String year)
+    {
+        super("", "", "", id, role, cmd, destSrv);
+        _movieMessage = new MovieMessage(title, year);
+    }
+}

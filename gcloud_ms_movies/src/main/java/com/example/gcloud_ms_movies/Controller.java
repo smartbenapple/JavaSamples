@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_movies;
 
+import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
 
@@ -16,18 +17,18 @@ public class Controller
         {
             case "getAll":
                 System.out.println("Movies:[Controller.ProcessAction] getAll found.");
-                getAllAction(icMessage);
+                GetAllAction(icMessage);
                 break;
             case "create":
                 System.out.println("Movies:[Controller.ProcessAction] create found.");
-                //CreateAction((IcNewUsrMessage) icMessage);
+                CreateAction((IcNewMovieMessage) icMessage); // todo: why is IcMessage from the wire going to cast up? - test please.
                 break;
             default:
                 break;
         }
     }
 
-    public void getAllAction(IcMessage icMessage)
+    public void GetAllAction(IcMessage icMessage)
     {
         try
         {
@@ -41,5 +42,10 @@ public class Controller
             // return 500 error message.
             System.out.println("Movies:[Controller.getAllAction] Error.");
         }
+    }
+
+    public void CreateAction(IcNewMovieMessage icNewMovieMessage)
+    {
+
     }
 }

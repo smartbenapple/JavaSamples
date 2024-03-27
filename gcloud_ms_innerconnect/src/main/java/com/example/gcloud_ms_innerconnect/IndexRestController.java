@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_innerconnect;
 
 import com.example.gcloud_ms_movies.adapters.Adp_MFM_ICM;
+import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.adapters.Adp_UFM_ICM;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
@@ -27,6 +28,12 @@ public class IndexRestController
         return connect.AddData(icMessage);
     }
 
+    @PostMapping("/sendmeNewmovie") // in: path
+    public String MovieAddData(@RequestBody IcNewMovieMessage icNewMovieMessage)
+    {
+        return connect.AddData(icNewMovieMessage);
+    }
+
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"password":"...","username":"..."}]"}
     @PostMapping("/useranswer")
     public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
@@ -36,11 +43,11 @@ public class IndexRestController
     }
 
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"title":"...","year":"..."}]"}
-    @PostMapping("/movieanswer")
-    public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage)
+    @PostMapping("/moviesAnswer")
+    public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
-        // todo: requires an IcMoviesMessage class and adapter.
-        Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
-        return connect.AddData(adapter.Output());
+       // Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
+        //return connect.AddData(adapter.Output());
+        return "hello=" + moviesFirebaseMessage;
     }
 }

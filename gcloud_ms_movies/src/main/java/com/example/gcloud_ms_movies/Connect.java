@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_movies;
 
+import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
@@ -81,5 +82,34 @@ public class Connect
                 .toBodilessEntity());
 
         System.out.println("Movies:[Connect.SendData] Result=" + result);
+    }
+
+    public void CreateMovie(IcNewMovieMessage icNewMovieMessage)
+    {
+        System.out.println("Movies:[Connect.CreateMovie] Start");
+
+        String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
+        String url2 = "http://localhost:8383/movies";
+
+        RestClient rest = RestClient.create();
+
+        // Failed: Test creating headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin","*");
+        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+
+        // Expect to receive: {"message":"success"}
+        // Firebase NodeJs service will send answer directly to innerconnect.
+        String result = String.valueOf(rest.post()
+                .uri(url2)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                //.headers((Consumer<HttpHeaders>) headers)
+                .body(icNewMovieMessage)
+                .retrieve()
+                .toBodilessEntity());
+
+        System.out.println("Movies:[Connect.CreateMovie] Response=" + result);
     }
 }
