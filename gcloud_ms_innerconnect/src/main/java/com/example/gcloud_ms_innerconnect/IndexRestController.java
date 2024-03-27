@@ -5,6 +5,7 @@ import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.adapters.Adp_UFM_ICM;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +35,14 @@ public class IndexRestController
         return connect.AddData(icNewMovieMessage);
     }
 
+    @PostMapping("/sendmeNewuser") // in: path
+    public String UserAddData(@RequestBody IcNewUsrMessage icNewUsrMessage)
+    {
+        return connect.AddData(icNewUsrMessage);
+    }
+
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"password":"...","username":"..."}]"}
-    @PostMapping("/useranswer")
+    @PostMapping("/usersAnswer")
     public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
     {
         Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);

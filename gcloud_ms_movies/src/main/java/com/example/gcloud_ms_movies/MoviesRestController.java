@@ -11,7 +11,7 @@ public class MoviesRestController
 {
     Controller ctrl = new Controller();
 
-    @PostMapping("/movie") // in: maps path
+    @PostMapping("/movies") // in: maps path
     public String ProcessAction(@RequestBody IcMessage icMessage)
     {
         try

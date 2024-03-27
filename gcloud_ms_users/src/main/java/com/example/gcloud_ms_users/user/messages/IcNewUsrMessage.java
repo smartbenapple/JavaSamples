@@ -13,10 +13,9 @@ public class IcNewUsrMessage extends IcMessage
         return _userMessage;
     }
 
-    public IcNewUsrMessage(@JsonProperty("host") String host, @JsonProperty("port") String port, @JsonProperty("path") String path, @JsonProperty("id") String id,
-                           @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("username") String userName, @JsonProperty("password") String password)
+    public IcNewUsrMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("username") String userName, @JsonProperty("password") String password)
     {
-        super(host, port, path, id, role, cmd, destSrv);
+        super("", "", "", id, role, cmd, destSrv);
         _userMessage = new UserMessage(userName,password);
     }
 }

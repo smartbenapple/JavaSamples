@@ -102,7 +102,7 @@ public class Innerconnect
                     System.out.println("IC:[Innerconnect.watchQueues] UserSrv");
                     item.set_host("localhost"); // gcloud-ms-users-axxh6chama-wl.a.run.app
                     item.set_port("8082");
-                    item.set_path("/users");
+                    item.set_path(Objects.equals(item.get_cmd(), "create") ? "/usercreate" : "/users");
                     SendData(item);
                     break;
                 case "ApiSrv": // Send to API service

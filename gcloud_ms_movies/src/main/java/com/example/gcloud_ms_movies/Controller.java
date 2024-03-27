@@ -33,9 +33,7 @@ public class Controller
         try
         {
             // Get movies from firebase service
-            MoviesFirebaseMessage data = connect.GetMoviesData(icMessage);
-            // send movies results to innerconnect.
-            connect.SendMovies(data);
+            connect.GetMoviesData(icMessage);
         }
         catch(Exception e)
         {

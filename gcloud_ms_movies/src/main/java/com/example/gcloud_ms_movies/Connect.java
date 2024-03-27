@@ -15,7 +15,7 @@ public class Connect
 {
     // Springs: RestClient
     // https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
-    public MoviesFirebaseMessage GetMoviesData(IcMessage icMessage) throws JsonProcessingException
+    public void GetMoviesData(IcMessage icMessage) throws JsonProcessingException
     {
         System.out.println("Movies:[Connect.GetMoviesData] Start...");
 
@@ -32,29 +32,24 @@ public class Connect
 
         // Expect to receive: {"message":"success"}
         // Firebase NodeJs service will send answer directly to innerconnect.
-        ResponseEntity<MoviesFirebaseMessage> result = rest.post()
+        String result = String.valueOf(rest.post()
                 .uri(url2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)
                 .body(icMessage)
                 .retrieve()
-                .toEntity(MoviesFirebaseMessage.class);
-
-        // Cast to class type from GetBody().
-        MoviesFirebaseMessage data = result.getBody();
-        MovieMessage[] movies = data.Movies();
+                .toBodilessEntity());
 
         // Using ObjectMapper to map Java->String (similar to JSON.Parse)
         // https://www.baeldung.com/jackson-object-mapper-tutorial
         ObjectMapper om = new ObjectMapper();
-        String moviesAsString = om.writeValueAsString(movies);
+        String resultAsString = om.writeValueAsString(result);
 
-        System.out.println("Movies:[Connect.GetUsersData] Response=" +moviesAsString);
-
-        return data;
+        System.out.println("Movies:[Connect.GetUsersData] Response=" + resultAsString);
     }
 
+    // todo: is this method required?
     // Sends to movies_firebase service.
     public void SendMovies(MoviesFirebaseMessage moviesFirebaseMessage)
     {
