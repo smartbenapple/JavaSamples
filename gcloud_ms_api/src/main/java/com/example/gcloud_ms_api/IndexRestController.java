@@ -1,6 +1,12 @@
 package com.example.gcloud_ms_api;
 
+import com.example.gcloud_ms_api.communication.Connect;
 import com.example.gcloud_ms_api.user.Controller;
+import com.example.gcloud_ms_api.utility.OMHelper;
+import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
+import com.example.gcloud_ms_movies.messages.MovieMessage;
+import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
+import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +23,13 @@ import java.io.OutputStream;
 public class IndexRestController
 {
     Controller ctrl = new Controller();
+    Connect connect = new Connect();
 
     public IndexRestController()
     {
     }
 
-    @PostMapping("/users")
+    @PostMapping("/users") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void UserRouter(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
@@ -41,15 +48,29 @@ public class IndexRestController
         System.out.println("API:[IRC.UserRouter] Start");
     }
 
-    @PostMapping("/movies")
+    @PostMapping("/movies") // in: path
     public void MovieRouter()
     {
 
     }
 
-    @PostMapping("/sendme")
-    public void SendmeRouter()
+    @PostMapping("/sendmeUsers") // in: path
+    public void SendmeUsersRouter(@RequestBody IcAnsUsrMessage icAnsUsrMessage)
     {
+        // get required data
+        String id = icAnsUsrMessage.get_id();
+        UsersFirebaseMessage data = icAnsUsrMessage.get_usersFirebaseMessage();
+        String jsonData = OMHelper.Parse(data);
+        connect.RegistryHandler(id, jsonData);
+    }
 
+    @PostMapping("/sendmeMovies") // in: path
+    public void SendmeMoviesRouter(@RequestBody IcAnsMoviesMessage icAnsMoviesMessage)
+    {
+        // get required data
+        String id = icAnsMoviesMessage.get_id();
+        MovieMessage[] data = icAnsMoviesMessage.get_movies();
+        String jsonData = OMHelper.Parse(data);
+        connect.RegistryHandler(id, jsonData);
     }
 }

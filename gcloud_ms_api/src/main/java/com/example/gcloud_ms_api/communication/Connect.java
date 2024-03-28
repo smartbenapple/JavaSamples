@@ -2,11 +2,11 @@ package com.example.gcloud_ms_api.communication;
 
 import com.example.gcloud_ms_api.messages.apiMessage;
 import com.example.gcloud_ms_api.utility.BytesHelper;
+import com.example.gcloud_ms_users.user.messages.IcMessage;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -28,8 +28,11 @@ public class Connect
         System.out.println("API:[Connect.RegisterId]  Stored 'Response' successfully for id=" + id);
     }
 
-    public <T extends Serializable> void Answer(String id, T data) // todo: set to specific class type?
+    public void Answer(String id, String data)
     {
+        System.out.println("API:[Connect.Answer] Start answering call for id=" + id);
+
+        // Get response from registry array
         HttpServletResponse response = registry.get(id);
 
         try
@@ -39,10 +42,20 @@ public class Connect
             OutputStream output = response.getOutputStream();
             byte[] dataBytes = BytesHelper.Convert(data);
             output.write(dataBytes);
+            System.out.println("API:[Connect.Answer] Triggering send for id=" + id);
+
+            // Delete item from registry array
+            registry.remove(id);
         }
         catch(Exception e)
         {
             System.out.println("API:[Connect.Answer] Error=" + e.getMessage());
         }
+    }
+
+    public void RegistryHandler(String id, String data) // todo: replace object with specific class
+    {
+        System.out.println("API:[Connect.RegistryHandler] id=" + id);
+        Answer(id, data);
     }
 }

@@ -107,9 +107,9 @@ public class Innerconnect
                     break;
                 case "ApiSrv": // Send to API service
                     System.out.println("IC:[Innerconnect.watchQueues] ApiSrv");
-                    item.set_host("gcloud-ms-api-axxh6chama-wl.a.run.app");
-                    item.set_port("");
-                    item.set_path("/sendme");
+                    item.set_host("localhost"); // gcloud-ms-api-axxh6chama-wl.a.run.app
+                    item.set_port("8080");
+                    item.set_path(item.get_path()); // was: "/sendme" - now can be different paths for users/movies answers.
                     SendData(item);
                     break;
             }

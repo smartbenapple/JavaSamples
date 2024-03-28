@@ -1,9 +1,11 @@
 package com.example.gcloud_ms_innerconnect;
 
 import com.example.gcloud_ms_movies.adapters.Adp_MFM_ICM;
+import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
 import com.example.gcloud_ms_users.user.adapters.Adp_UFM_ICM;
+import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
 import com.example.gcloud_ms_users.user.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
@@ -47,7 +49,9 @@ public class IndexRestController
     public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
     {
         Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);
-        return connect.AddData(adapter.Output());
+        IcAnsUsrMessage object = adapter.Output();
+        object.set_path("/sendmeUsers");
+        return connect.AddData(object);
     }
 
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"title":"...","year":"..."}]"}
@@ -55,6 +59,8 @@ public class IndexRestController
     public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
         Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
-        return connect.AddData(adapter.Output());
+        IcAnsMoviesMessage object = adapter.Output();
+        object.set_path("/sendmeMovies");
+        return connect.AddData(object);
     }
 }
