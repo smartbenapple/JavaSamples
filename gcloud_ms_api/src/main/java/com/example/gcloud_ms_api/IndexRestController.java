@@ -29,11 +29,19 @@ public class IndexRestController
     {
     }
 
+    @GetMapping("/users")
+    public void UserGetRouter(HttpServletResponse response)
+    {
+        System.out.println("API:[IRC.UserGetRouter] Start");
+
+        ctrl.GetAllAction(response);
+    }
+
     @PostMapping("/users") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void UserRouter(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        response.setStatus(500);
+        System.out.println("API:[IRC.UserRouter] Start");
 
         // To output through response stream, simply grab onto the OutputStream reference.
         // Then write to the OutputStream using byte arrays.
@@ -42,10 +50,8 @@ public class IndexRestController
         byte[] testBytes = test.getBytes();
         output.write(testBytes);
 
-        // todo: GetAll calls
-        ctrl.GetAllAction();
+        // todo: create call
 
-        System.out.println("API:[IRC.UserRouter] Start");
     }
 
     @PostMapping("/movies") // in: path
@@ -57,6 +63,8 @@ public class IndexRestController
     @PostMapping("/sendmeUsers") // in: path
     public void SendmeUsersRouter(@RequestBody IcAnsUsrMessage icAnsUsrMessage)
     {
+        System.out.println("API:[IRC.SendmeUsersRouter] Start");
+
         // get required data
         String id = icAnsUsrMessage.get_id();
         UsersFirebaseMessage data = icAnsUsrMessage.get_usersFirebaseMessage();
@@ -67,6 +75,8 @@ public class IndexRestController
     @PostMapping("/sendmeMovies") // in: path
     public void SendmeMoviesRouter(@RequestBody IcAnsMoviesMessage icAnsMoviesMessage)
     {
+        System.out.println("API:[IRC.SendmeMoviesRouter] Start");
+
         // get required data
         String id = icAnsMoviesMessage.get_id();
         MovieMessage[] data = icAnsMoviesMessage.get_movies();

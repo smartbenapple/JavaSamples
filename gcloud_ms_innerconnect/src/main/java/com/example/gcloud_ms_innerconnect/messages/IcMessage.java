@@ -89,4 +89,14 @@ public class IcMessage
         _path = path;
         _apiMessage = new apiMessage(id, role, cmd, destSrv);
     }
+
+    public IcMessage(apiMessage apiMessage)
+    {
+        System.out.println("[InnerConnectMessage.ctr2] Triggered");
+
+        _host = "";
+        _port = "";
+        _path = "";
+        _apiMessage = apiMessage;
+    }
 }

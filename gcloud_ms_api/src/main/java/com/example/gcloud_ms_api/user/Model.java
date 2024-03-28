@@ -3,6 +3,7 @@ package com.example.gcloud_ms_api.user;
 import com.example.gcloud_ms_api.communication.Connect;
 import com.example.gcloud_ms_api.messages.apiMessage;
 import com.example.gcloud_ms_api.utility.OMHelper;
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 
 public class Model
 {
@@ -10,15 +11,19 @@ public class Model
 
     public Model() {}
 
-    public void GetAll()
+    public IcMessage GetAll()
     {
         // Note: Set id as blank to trigger automatic UUID internally.
-        apiMessage message = new apiMessage("","user","getAll","UserSrv"); // todo: research uuid equivalent
+        apiMessage apiMessage = new apiMessage("","user","getAll","UserSrv");
+        IcMessage message = new IcMessage(apiMessage);
 
         String output = OMHelper.Parse(message);
         System.out.println("API[Model.GetAll] message=" + output);
 
-        //connect.SendData(message, "sendme");
+        // Send to innerconnect service
+        connect.SendData(message, "sendme");
+
+        return message;
     }
 
     public void Create()

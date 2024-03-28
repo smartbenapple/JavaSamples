@@ -10,6 +10,21 @@ public class IcAnsUsrMessage extends IcMessage
 {
     private UsersFirebaseMessage _usersFirebaseMessage;
 
+    // Note: Property required for deserialization process to gain access to nested class.
+    @JsonGetter("id")
+    public String getId()
+    {
+        return _usersFirebaseMessage.get_id();
+    }
+
+    // Note: Property required for deserialization process to gain access to nested class.
+    @JsonGetter("destSrv")
+    public String getDestSrv()
+    {
+        return _usersFirebaseMessage.get_id();
+    }
+
+    // Note: Property required for deserialization process to gain access to nested class.
     @JsonGetter("data")
     public UsersFirebaseMessage get_usersFirebaseMessage()
     {
