@@ -14,11 +14,26 @@ import java.util.Hashtable;
 
 public class Connect
 {
+    private static Connect _singleton;
+
+    // Singleton
+    public static Connect GetSingleton()
+    {
+        if (_singleton == null)
+            _singleton = new Connect();
+        return _singleton;
+    }
+
+    private Connect() {}
+
     //ArrayList<String> registry = new ArrayList<>();
-    Dictionary<String, HttpServletResponse> registry = new Hashtable<>();
+    private static Dictionary<String, HttpServletResponse> registry = new Hashtable<>();
 
     public void Register(apiMessage message, HttpServletResponse response)
     {
+        // todo: Error caught during testing: "The response object has been recycled and is no longer associated with this facade."
+        //       Apparently this error is by design in the Java framework.  The facade handle to the response object is recycles in memory for whatever reason.
+        //       Solution: Use the NodeJs project to store the response objects in an array.  And then test retrieving the object.
         String id = message.get_id();
         registry.put(id, response);
         System.out.println("API:[Connect.Register]  Stored 'Response' successfully for id=" + id);

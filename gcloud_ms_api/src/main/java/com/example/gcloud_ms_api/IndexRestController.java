@@ -23,7 +23,7 @@ import java.io.OutputStream;
 public class IndexRestController
 {
     Controller ctrl = new Controller();
-    Connect connect = new Connect();
+    Connect connect = Connect.GetSingleton();
 
     public IndexRestController()
     {

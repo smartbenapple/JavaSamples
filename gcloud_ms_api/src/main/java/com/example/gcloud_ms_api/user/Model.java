@@ -7,7 +7,7 @@ import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 
 public class Model
 {
-    Connect connect = new Connect();
+    Connect connect = Connect.GetSingleton();
 
     public Model() {}
 
