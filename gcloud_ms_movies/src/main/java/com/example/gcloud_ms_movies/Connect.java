@@ -1,14 +1,11 @@
 package com.example.gcloud_ms_movies;
 
 import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
-import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
-import com.example.gcloud_ms_users.user.messages.IcMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 
 public class Connect

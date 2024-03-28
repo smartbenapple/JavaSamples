@@ -1,7 +1,6 @@
 package com.example.gcloud_ms_users.user.adapters;
 
 import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
-import com.example.gcloud_ms_users.user.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 
 public class Adp_UFM_ICM

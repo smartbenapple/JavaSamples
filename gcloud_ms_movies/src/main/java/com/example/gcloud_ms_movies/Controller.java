@@ -1,8 +1,6 @@
 package com.example.gcloud_ms_movies;
 
 import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
-import com.example.gcloud_ms_movies.messages.MoviesFirebaseMessage;
-import com.example.gcloud_ms_users.user.messages.IcMessage;
 
 public class Controller
 {

@@ -2,11 +2,12 @@ package com.example.gcloud_ms_api.communication;
 
 import com.example.gcloud_ms_api.messages.apiMessage;
 import com.example.gcloud_ms_api.utility.BytesHelper;
-import com.example.gcloud_ms_users.user.messages.IcMessage;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClient;
 
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -57,5 +58,33 @@ public class Connect
     {
         System.out.println("API:[Connect.RegistryHandler] id=" + id);
         Answer(id, data);
+    }
+
+    public void SendData(IcMessage message, String path)
+    {
+        System.out.println("Api:[Connect.SendData] Start");
+
+        String url = "https://gcloud-innerconnect-axxh6chama-wl.a.run.app/" + path;
+        String url2 = "http://localhost:8181/" + path; // sendmeNewmovie or sendmeNewuser or sendme
+
+        RestClient rest = RestClient.create();
+
+        // Failed: Test creating headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin","*");
+        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+
+        // TODO: Add a promise like wrapper around this call to test async.
+        String result = String.valueOf(rest.post()
+                .uri(url2)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                //.headers((Consumer<HttpHeaders>) headers)
+                .body(message)
+                .retrieve()
+                .toBodilessEntity());
+
+        System.out.println("Api:[Connect.SendData] Result=" + result);
     }
 }
