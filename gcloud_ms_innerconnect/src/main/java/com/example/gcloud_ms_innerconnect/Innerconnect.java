@@ -1,6 +1,6 @@
 package com.example.gcloud_ms_innerconnect;
 
-import com.example.gcloud_ms_users.user.messages.IcMessage;
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;

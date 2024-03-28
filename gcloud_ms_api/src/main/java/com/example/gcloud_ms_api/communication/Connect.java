@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_api.communication;
 
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_api.messages.apiMessage;
 import com.example.gcloud_ms_api.utility.BytesHelper;
 import jakarta.servlet.http.HttpServletResponse;

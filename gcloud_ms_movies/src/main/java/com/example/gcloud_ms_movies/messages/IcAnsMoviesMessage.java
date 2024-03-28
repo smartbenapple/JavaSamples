@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_movies.messages;
 
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

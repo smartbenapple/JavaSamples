@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_users.user;
 
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 
 // System.out.println() => https://www.baeldung.com/java-system-out-println-vs-loggers

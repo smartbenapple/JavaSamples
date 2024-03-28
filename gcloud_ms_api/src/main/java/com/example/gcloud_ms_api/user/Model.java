@@ -18,7 +18,7 @@ public class Model
         String output = OMHelper.Parse(message);
         System.out.println("API[Model.GetAll] message=" + output);
 
-        connect.SendData(message, "sendme");
+        //connect.SendData(message, "sendme");
     }
 
     public void Create()

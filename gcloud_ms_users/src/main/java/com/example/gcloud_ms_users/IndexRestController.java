@@ -2,6 +2,7 @@ package com.example.gcloud_ms_users;
 
 import com.example.gcloud_ms_users.user.Controller;
 
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

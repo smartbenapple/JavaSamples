@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_movies;
 
+import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
