@@ -1,4 +1,4 @@
-package com.example.gcloud_ms_users.user.messages;
+package com.example.gcloud_ms_innerconnect.messages;
 
 import com.example.gcloud_ms_api.messages.apiMessage;
 import com.fasterxml.jackson.annotation.JsonCreator;
