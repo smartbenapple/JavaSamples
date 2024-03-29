@@ -16,7 +16,7 @@ public class IcNewUsrMessage extends IcMessage
 
     public IcNewUsrMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("username") String userName, @JsonProperty("password") String password)
     {
-        super("", "", "", id, role, cmd, destSrv);
+        super("", "", "", id, role, cmd, destSrv, ""); // todo: set base data to usermessage?
         _userMessage = new UserMessage(userName,password);
     }
 }

@@ -1,15 +1,16 @@
 package com.example.gcloud_ms_api.messages;
 
+import com.example.gcloud_ms_users.user.messages.UserMessage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ApiFrontUsers
 {
     private String _id;
-    private String _data; // todo: change to users message
+    private UserMessage _data;
     private String _path;
 
-    public String get_data()
+    public UserMessage get_data()
     {
         return _data;
     }
@@ -25,7 +26,7 @@ public class ApiFrontUsers
     }
 
     @JsonCreator
-    public ApiFrontUsers(@JsonProperty("id") String id, @JsonProperty("data") String data, @JsonProperty("path") String path)
+    public ApiFrontUsers(@JsonProperty("id") String id, @JsonProperty("data") UserMessage data, @JsonProperty("path") String path)
     {
         _id = id;
         _data = data;

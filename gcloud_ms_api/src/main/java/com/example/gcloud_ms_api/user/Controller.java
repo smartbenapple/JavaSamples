@@ -40,15 +40,15 @@ public class Controller
         }
     }
 
-    public void CreateAction()
+    public void CreateAction(ServletResponse response, ApiFrontUsers users)
     {
         try
         {
-
+            IcMessage message = model.Create(users);
         }
         catch(Exception e)
         {
-            System.out.println("Api:[Controller.CreateAction]");
+            System.out.println("Api:[Controller.CreateAction] Error=" + e.getMessage());
         }
     }
 }

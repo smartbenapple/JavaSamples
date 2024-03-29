@@ -16,7 +16,7 @@ public class IcAnsMoviesMessage extends IcMessage
 
     public IcAnsMoviesMessage(@JsonProperty("id") String id, @JsonProperty("destSrv") String destSrv, @JsonProperty("data") MovieMessage[] movies)
     {
-        super("", "", "", id, "", "", destSrv);
+        super("", "", "", id, "", "", destSrv,""); // todo: set base data to movies?
         _movies = movies;
     }
 }

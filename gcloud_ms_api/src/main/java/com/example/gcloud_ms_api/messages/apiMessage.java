@@ -15,6 +15,8 @@ public class apiMessage
     private String _cmd;
     private String _destSrv;
 
+    private String _data;
+
     @JsonGetter("id")
     public String get_id()
     {
@@ -39,8 +41,14 @@ public class apiMessage
         return _destSrv;
     }
 
+    @JsonGetter("data")
+    public String get_data()
+    {
+        return _data;
+    }
+
     @JsonCreator
-    public apiMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv)
+    public apiMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("data") String data)
     {
         // Create UUID
         UUID uuid = UUID.randomUUID();
@@ -50,5 +58,6 @@ public class apiMessage
         _role = role;
         _cmd = cmd;
         _destSrv = destSrv;
+        _data = data;
     }
 }

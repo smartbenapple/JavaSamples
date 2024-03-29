@@ -30,7 +30,7 @@ public class IcNewMovieMessage extends IcMessage
     @JsonCreator
     public IcNewMovieMessage(@JsonProperty("id") String id, @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("title") String title, @JsonProperty("year") String year)
     {
-        super("", "", "", id, role, cmd, destSrv);
+        super("", "", "", id, role, cmd, destSrv, ""); // todo: the base data set as MovieMessage?
         _movieMessage = new MovieMessage(title, year);
     }
 }

@@ -22,7 +22,7 @@ public class UserMessage
     }
 
     @JsonCreator
-    UserMessage(@JsonProperty("username") String userName, @JsonProperty("password") String password)
+    public UserMessage(@JsonProperty("username") String userName, @JsonProperty("password") String password)
     {
         _userName = userName;
         _password = password;

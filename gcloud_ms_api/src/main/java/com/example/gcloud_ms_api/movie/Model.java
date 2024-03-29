@@ -15,7 +15,7 @@ public class Model
     public IcMessage GetAll(ApiFrontMovies movies)
     {
         // Note: Set id as blank to trigger automatic UUID internally.
-        apiMessage apiMessage = new apiMessage(movies.get_id(),"user","getAll","MovieSrv");
+        apiMessage apiMessage = new apiMessage(movies.get_id(),"user","getAll","MovieSrv", "");
         IcMessage message = new IcMessage(apiMessage);
 
         String output = OMHelper.Parse(message);

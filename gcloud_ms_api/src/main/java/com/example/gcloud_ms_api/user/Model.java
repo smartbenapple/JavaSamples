@@ -15,7 +15,7 @@ public class Model
     public IcMessage GetAll(ApiFrontUsers users)
     {
         // Note: Set id as blank to trigger automatic UUID internally.
-        apiMessage apiMessage = new apiMessage(users.get_id(),"user","getAll","UserSrv");
+        apiMessage apiMessage = new apiMessage(users.get_id(),"user","getAll","UserSrv","");
         IcMessage message = new IcMessage(apiMessage);
 
         String output = OMHelper.Parse(message);
@@ -27,8 +27,19 @@ public class Model
         return message;
     }
 
-    public void Create()
+    public IcMessage Create(ApiFrontUsers users)
     {
+        // Note: Set id as blank to trigger automatic UUID internally.
+        String data = OMHelper.Parse(users.get_data());
+        apiMessage apiMessage = new apiMessage(users.get_id(),"user","getAll","UserSrv", data);
+        IcMessage message = new IcMessage(apiMessage);
 
+        String output = OMHelper.Parse(message);
+        System.out.println("API[Model.GetAll] message=" + output);
+
+        // Send to innerconnect service
+        connect.SendData(message, "sendmeNewuser");
+
+        return message;
     }
 }

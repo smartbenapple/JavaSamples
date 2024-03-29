@@ -8,7 +8,9 @@ import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
+import com.example.gcloud_ms_users.user.messages.UserMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.stream.StreamSupport;
 
 // Get the request/response objects using @RequestMapping
 // Note: Testing shows the request/response objects also map with @PostMapping.
@@ -46,10 +49,26 @@ public class IndexRestController
 
     @PostMapping("/usersPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
-    public void UserRouter(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) throws IOException
+    public void UserRouter(@RequestBody ApiFrontUsers body, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         System.out.println("API:[IRC.UserRouter] Start");
 
+        try
+        {
+            // Pass: Tested conversion to ApiFrontUsers
+            //ApiFrontUsers users = OMHelper.Convert(body, ApiFrontUsers.class);
+            //System.out.println("TESTING: result= " + users.get_id());
+
+            // Pass: Tested OmHelper.Convert.
+            /*UserMessage users = new UserMessage("john","123");
+            String usersData = OMHelper.Parse(users);
+            UserMessage result = OMHelper.Convert(usersData, UserMessage.class);
+            System.out.println("TESTING: result= " + result.get_password());*/
+        }
+        catch(Exception e)
+        {
+            System.out.println("API[IRC.UserRouter] Error=" + e.getMessage());
+        }
         // To output through response stream, simply grab onto the OutputStream reference.
         // Then write to the OutputStream using byte arrays.
         OutputStream output = response.getOutputStream();

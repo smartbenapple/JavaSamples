@@ -35,7 +35,7 @@ public class IcAnsUsrMessage extends IcMessage
     public IcAnsUsrMessage(@JsonProperty("host") String host, @JsonProperty("port") String port, @JsonProperty("path") String path, @JsonProperty("id") String id,
                            @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("data") UsersFirebaseMessage usersFirebaseMessage)
     {
-        super(host, port, path, id, role, cmd, destSrv);
+        super(host, port, path, id, role, cmd, destSrv,""); // todo: base data set as UsersFirebaseMessage
         _usersFirebaseMessage = usersFirebaseMessage;
     }
 }

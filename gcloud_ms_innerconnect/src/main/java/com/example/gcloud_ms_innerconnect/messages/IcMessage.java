@@ -73,6 +73,13 @@ public class IcMessage
         return _apiMessage.get_destSrv();
     }
 
+    // Note: Property required for deserialization process to gain access to nested class.
+    @JsonGetter("data")
+    public String get_data()
+    {
+        return _apiMessage.get_data();
+    }
+
     public apiMessage get_apiMessage()
     {
         return _apiMessage;
@@ -80,14 +87,14 @@ public class IcMessage
 
     @JsonCreator
     public IcMessage(@JsonProperty("host") String host, @JsonProperty("port") String port, @JsonProperty("path") String path, @JsonProperty("id") String id,
-                     @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv)
+                     @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("data") String data)
     {
         System.out.println("[InnerConnectMessage.ctr] Triggered");
 
         _host = host;
         _port = port;
         _path = path;
-        _apiMessage = new apiMessage(id, role, cmd, destSrv);
+        _apiMessage = new apiMessage(id, role, cmd, destSrv, data);
     }
 
     public IcMessage(apiMessage apiMessage)
