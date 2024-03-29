@@ -5,23 +5,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ApiFrontMovies
 {
-    private String _title;
-    private String _year;
+    private String _id;
+    private String _data; // todo: change to movies message
+    private String _path;
 
-    public String get_title()
+    public String get_data()
     {
-        return _title;
+        return _data;
     }
 
-    public String get_year()
+    public String get_id()
     {
-        return _year;
+        return _id;
+    }
+
+    public String get_path()
+    {
+        return _path;
     }
 
     @JsonCreator
-    public ApiFrontMovies(@JsonProperty("title") String title, @JsonProperty("year") String year)
+    public ApiFrontMovies(@JsonProperty("id") String id, @JsonProperty("data") String data, @JsonProperty("path") String path)
     {
-        _title = title;
-        _year = year;
+        _id = id;
+        _data = data;
+        _path = path;
     }
 }

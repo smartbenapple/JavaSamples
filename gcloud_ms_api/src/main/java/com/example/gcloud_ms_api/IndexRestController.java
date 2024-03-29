@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_api;
 
 import com.example.gcloud_ms_api.communication.Connect;
+import com.example.gcloud_ms_api.messages.ApiFrontMovies;
 import com.example.gcloud_ms_api.messages.ApiFrontUsers;
 import com.example.gcloud_ms_api.user.Controller;
 import com.example.gcloud_ms_api.utility.OMHelper;
@@ -12,8 +13,9 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.coyote.Response;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,7 +28,8 @@ import java.io.OutputStream;
 @RestController
 public class IndexRestController
 {
-    Controller ctrl = new Controller();
+    Controller userCtrl = new Controller();
+    com.example.gcloud_ms_api.movie.Controller movieCtrl = new com.example.gcloud_ms_api.movie.Controller();
     Connect connect = Connect.GetSingleton();
 
     public IndexRestController()
@@ -38,7 +41,7 @@ public class IndexRestController
     {
         System.out.println("API:[IRC.UserGetRouter] Start");
 
-        ctrl.GetAllAction(srvResponse, users);
+        userCtrl.GetAllAction(srvResponse, users);
     }
 
     @PostMapping("/usersPost") // in: path
@@ -55,14 +58,14 @@ public class IndexRestController
         output.write(testBytes);
 
         // todo: create call
-
-
     }
 
-    @PostMapping("/movies") // in: path
-    public void MovieRouter()
+    @PostMapping("/moviesGet") // in: path
+    public void MovieGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontMovies movies)
     {
+        System.out.println("API:[IRC.MovieGetRouter] Start");
 
+        movieCtrl.GetAllAction(srvResponse, movies);
     }
 
     @PostMapping("/sendmeUsers") // in: path

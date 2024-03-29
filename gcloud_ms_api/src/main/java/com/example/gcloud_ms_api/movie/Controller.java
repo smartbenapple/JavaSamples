@@ -1,22 +1,17 @@
-package com.example.gcloud_ms_api.user;
+package com.example.gcloud_ms_api.movie;
 
 import com.example.gcloud_ms_api.communication.Connect;
-import com.example.gcloud_ms_api.messages.ApiFrontUsers;
+import com.example.gcloud_ms_api.messages.ApiFrontMovies;
+import com.example.gcloud_ms_api.movie.Model;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import jakarta.servlet.ServletResponse;
-import org.apache.coyote.Response;
-import jakarta.servlet.http.HttpServletResponse;
 
-import java.util.function.Consumer;
-
-// Java: How to pass function callbacks to a method; Consumer<T>
-// https://www.baeldung.com/java-callback-functions
-// https://www.geeksforgeeks.org/java-8-consumer-interface-in-java-with-examples/
 public class Controller
 {
+    Connect connect = Connect.GetSingleton();
     Model model = new Model();
 
-    public void GetAllAction(ServletResponse response, ApiFrontUsers users) // HttpServletResponse response; ServletResponse; Response
+    public void GetAllAction(ServletResponse response, ApiFrontMovies movies) // HttpServletResponse response; ServletResponse; Response
     {
         try
         {
@@ -31,7 +26,10 @@ public class Controller
             // Create Message
             ThreadHelper.Async(work, null);*/
 
-            IcMessage message = model.GetAll(users);
+            IcMessage message = model.GetAll(movies);
+
+            // Register response
+            //connect.Register(message.get_apiMessage(), response);
         }
         catch(Exception e)
         {
