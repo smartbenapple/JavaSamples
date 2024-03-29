@@ -1,14 +1,18 @@
 package com.example.gcloud_ms_api;
 
 import com.example.gcloud_ms_api.communication.Connect;
+import com.example.gcloud_ms_api.messages.ApiFrontUsers;
 import com.example.gcloud_ms_api.user.Controller;
 import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.coyote.Response;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,15 +33,15 @@ public class IndexRestController
     {
     }
 
-    @GetMapping("/users")
-    public void UserGetRouter(HttpServletResponse response)
+    @PostMapping("/usersGet") // in: path
+    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontUsers users) // HttpServletResponse response
     {
         System.out.println("API:[IRC.UserGetRouter] Start");
 
-        ctrl.GetAllAction(response);
+        ctrl.GetAllAction(srvResponse, users);
     }
 
-    @PostMapping("/users") // in: path
+    @PostMapping("/usersPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void UserRouter(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
@@ -51,6 +55,7 @@ public class IndexRestController
         output.write(testBytes);
 
         // todo: create call
+
 
     }
 
@@ -69,7 +74,7 @@ public class IndexRestController
         String id = icAnsUsrMessage.get_id();
         UsersFirebaseMessage data = icAnsUsrMessage.get_usersFirebaseMessage();
         String jsonData = OMHelper.Parse(data);
-        connect.RegistryHandler(id, jsonData);
+        //connect.RegistryHandler(id, jsonData); // todo: fix
     }
 
     @PostMapping("/sendmeMovies") // in: path
@@ -81,6 +86,6 @@ public class IndexRestController
         String id = icAnsMoviesMessage.get_id();
         MovieMessage[] data = icAnsMoviesMessage.get_movies();
         String jsonData = OMHelper.Parse(data);
-        connect.RegistryHandler(id, jsonData);
+        //connect.RegistryHandler(id, jsonData); // todo: fix
     }
 }

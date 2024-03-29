@@ -1,8 +1,10 @@
 package com.example.gcloud_ms_api.user;
 
 import com.example.gcloud_ms_api.communication.Connect;
-import com.example.gcloud_ms_api.utility.ThreadHelper;
+import com.example.gcloud_ms_api.messages.ApiFrontUsers;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
+import jakarta.servlet.ServletResponse;
+import org.apache.coyote.Response;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.function.Consumer;
@@ -15,7 +17,7 @@ public class Controller
     Connect connect = Connect.GetSingleton();
     Model model = new Model();
 
-    public void GetAllAction(HttpServletResponse response)
+    public void GetAllAction(ServletResponse response, ApiFrontUsers users) // HttpServletResponse response; ServletResponse; Response
     {
         try
         {
@@ -30,14 +32,15 @@ public class Controller
             // Create Message
             ThreadHelper.Async(work, null);*/
 
-            IcMessage message = model.GetAll();
+            IcMessage message = model.GetAll(users);
+
             // Register response
-            connect.Register(message.get_apiMessage(), response);
+            //connect.Register(message.get_apiMessage(), response);
         }
         catch(Exception e)
         {
             System.out.println("Api:[Controller.GetAllAction] Error=" + e.getMessage());
-            response.setStatus(500);
+            //response.setStatus(500);
         }
     }
 
