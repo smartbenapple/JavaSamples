@@ -46,6 +46,6 @@ public class IndexRestController
             System.out.println("[ProcessAction] Error=" + e.getMessage());
             return "Post Users Failed.";
         }
-        return "Post Users Worked.";
+        return "Success";
     }
 }

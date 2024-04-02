@@ -2,6 +2,7 @@ package com.example.gcloud_ms_api.user;
 
 import com.example.gcloud_ms_api.communication.Connect;
 import com.example.gcloud_ms_api.messages.ApiFrontUsers;
+import com.example.gcloud_ms_api.utility.ResponseHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import jakarta.servlet.ServletResponse;
 import org.apache.coyote.Response;
@@ -45,6 +46,7 @@ public class Controller
         try
         {
             IcMessage message = model.Create(users);
+            ResponseHelper.Write(response, "Success");
         }
         catch(Exception e)
         {

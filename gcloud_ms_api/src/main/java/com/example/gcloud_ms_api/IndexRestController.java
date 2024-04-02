@@ -5,6 +5,7 @@ import com.example.gcloud_ms_api.messages.ApiFrontMovies;
 import com.example.gcloud_ms_api.messages.ApiFrontUsers;
 import com.example.gcloud_ms_api.user.Controller;
 import com.example.gcloud_ms_api.utility.OMHelper;
+import com.example.gcloud_ms_api.utility.ResponseHelper;
 import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
@@ -40,15 +41,15 @@ public class IndexRestController
     }
 
     @PostMapping("/usersGet") // in: path
-    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody String users) // HttpServletResponse response ApiFrontUsers
+    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontUsers users) // HttpServletResponse response ApiFrontUsers
     {
         System.out.println("API:[IRC.UserGetRouter] Start");
 
         // Pass: Tested conversion to ApiFrontUsers
-        ApiFrontUsers result = OMHelper.Convert(users, ApiFrontUsers.class);
-        System.out.println("TESTING: result= " + result.get_id());
+        //ApiFrontUsers result = OMHelper.Convert(users, ApiFrontUsers.class);
+        //System.out.println("TESTING: result= " + result.get_id());
 
-        //userCtrl.GetAllAction(srvResponse, users);
+        userCtrl.GetAllAction(srvResponse, users);
     }
 
     @PostMapping("/usersPost") // in: path
@@ -77,10 +78,7 @@ public class IndexRestController
         }
         // To output through response stream, simply grab onto the OutputStream reference.
         // Then write to the OutputStream using byte arrays.
-        OutputStream output = response.getOutputStream();
-        String test = "Hello";
-        byte[] testBytes = test.getBytes();
-        output.write(testBytes);
+        ResponseHelper.Write(response, "Hello");
 
         // todo: create call
     }

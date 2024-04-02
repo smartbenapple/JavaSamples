@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_innerconnect;
 
+import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -75,6 +76,8 @@ public class Innerconnect
                 .retrieve()
                 .toBodilessEntity());
 
+        String resultStr = OMHelper.Parse(result);
+        System.out.println("IC:[Innerconnect.RunSendData] Result=" + resultStr);
     }
 
     public void WatchQueues()
