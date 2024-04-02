@@ -40,16 +40,62 @@ public class IndexRestController
     }
 
     @PostMapping("/usersGet") // in: path
-    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontUsers users) // HttpServletResponse response
+    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody String users) // HttpServletResponse response ApiFrontUsers
     {
         System.out.println("API:[IRC.UserGetRouter] Start");
 
-        userCtrl.GetAllAction(srvResponse, users);
+        // Pass: Tested conversion to ApiFrontUsers
+        ApiFrontUsers result = OMHelper.Convert(users, ApiFrontUsers.class);
+        System.out.println("TESTING: result= " + result.get_id());
+
+        //userCtrl.GetAllAction(srvResponse, users);
     }
 
     @PostMapping("/usersPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void UserRouter(@RequestBody ApiFrontUsers body, HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        System.out.println("API:[IRC.UserRouter] Start");
+
+        try
+        {
+            // Pass: Tested conversion to ApiFrontUsers
+            //ApiFrontUsers users = OMHelper.Convert(body, ApiFrontUsers.class);
+            //System.out.println("TESTING: result= " + users.get_id());
+
+            // Pass: Tested OmHelper.Convert.
+            /*UserMessage users = new UserMessage("john","123");
+            String usersData = OMHelper.Parse(users);
+            UserMessage result = OMHelper.Convert(usersData, UserMessage.class);
+            System.out.println("TESTING: result= " + result.get_password());*/
+
+            userCtrl.CreateAction(response, body);
+        }
+        catch(Exception e)
+        {
+            System.out.println("API[IRC.UserRouter] Error=" + e.getMessage());
+        }
+        // To output through response stream, simply grab onto the OutputStream reference.
+        // Then write to the OutputStream using byte arrays.
+        OutputStream output = response.getOutputStream();
+        String test = "Hello";
+        byte[] testBytes = test.getBytes();
+        output.write(testBytes);
+
+        // todo: create call
+    }
+
+    @PostMapping("/moviesGet") // in: path
+    public void MovieGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontMovies movies)
+    {
+        System.out.println("API:[IRC.MovieGetRouter] Start");
+
+        movieCtrl.GetAllAction(srvResponse, movies);
+    }
+
+    @PostMapping("/moviesPost") // in: path
+    //@RequestMapping(value = "/users", method = RequestMethod.POST)
+    public void movieRouter(@RequestBody ApiFrontMovies body, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         System.out.println("API:[IRC.UserRouter] Start");
 
@@ -77,14 +123,6 @@ public class IndexRestController
         output.write(testBytes);
 
         // todo: create call
-    }
-
-    @PostMapping("/moviesGet") // in: path
-    public void MovieGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontMovies movies)
-    {
-        System.out.println("API:[IRC.MovieGetRouter] Start");
-
-        movieCtrl.GetAllAction(srvResponse, movies);
     }
 
     @PostMapping("/sendmeUsers") // in: path
