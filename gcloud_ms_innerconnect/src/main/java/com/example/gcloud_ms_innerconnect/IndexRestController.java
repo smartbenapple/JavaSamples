@@ -30,18 +30,21 @@ public class IndexRestController
     @PostMapping("/sendme") // in: path
     public String AddData(@RequestBody IcMessage icMessage)
     {
+        System.out.println("IC:[IRC.AddData] Start");
         return connect.AddData(icMessage);
     }
 
     @PostMapping("/sendmeNewmovie") // in: path
     public String MovieAddData(@RequestBody IcNewMovieMessage icNewMovieMessage)
     {
+        System.out.println("IC:[IRC.MovieAddData] Start");
         return connect.AddData(icNewMovieMessage);
     }
 
     @PostMapping("/sendmeNewuser") // in: path
     public String UserAddData(@RequestBody IcNewUsrMessage icNewUsrMessage)
     {
+        System.out.println("IC:[IRC.UserAddData] Start");
         return connect.AddData(icNewUsrMessage);
     }
 
@@ -49,6 +52,8 @@ public class IndexRestController
     @PostMapping("/usersAnswer")
     public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
     {
+        System.out.println("IC:[IRC.UserAddData] Start");
+
         Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);
         IcAnsUsrMessage object = adapter.Output();
         object.set_path("/sendmeUsers");
@@ -59,6 +64,8 @@ public class IndexRestController
     @PostMapping("/moviesAnswer")
     public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
+        System.out.println("IC:[IRC.MoviesAddData] Start");
+
         Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
         IcAnsMoviesMessage object = adapter.Output();
         object.set_path("/sendmeMovies");
