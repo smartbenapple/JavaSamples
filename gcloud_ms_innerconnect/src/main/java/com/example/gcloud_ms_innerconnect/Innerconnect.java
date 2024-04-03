@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_innerconnect;
 
 import com.example.gcloud_ms_api.utility.OMHelper;
+import com.example.gcloud_ms_api.utility.ThreadHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -8,6 +9,7 @@ import org.springframework.web.client.RestClient;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 public class Innerconnect
 {
@@ -32,23 +34,18 @@ public class Innerconnect
 
     public void SendData(IcMessage innerConnectMessage)
     {
-        System.out.println("IC:[Innerconnect.SendData] Start = ");
+        System.out.println("IC:[Innerconnect.SendData] Start");
 
         // reset Atomic value
         safeBool.set(false);
 
-        // Threads
-        // https://www.w3schools.com/java/java_threads.asp
-        // https://www.geeksforgeeks.org/asynchronous-synchronous-callbacks-java/
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                RunSendData(innerConnectMessage);
-                safeBool.set(true);
-            }
-        }).start();
+        // Run Consumer work through ThreadHelper
+        Consumer<String> work = (name) ->
+                {
+                    RunSendData(innerConnectMessage);
+                    safeBool.set(true);
+                };
+        ThreadHelper.Async(work, null);
 
         System.out.println("Users:[Connect.SendData] Innerconnect exit.");
     }
@@ -57,6 +54,7 @@ public class Innerconnect
     {
         String port = innerConnectMessage.get_port().isEmpty() ? "" : ":" + innerConnectMessage.get_port();
         String url = "http://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
+        System.out.println("IC:[Innerconnect.RunSendData] url=" + url);
 
         RestClient rest = RestClient.create();
 
