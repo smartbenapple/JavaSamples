@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-// Port=8080 - set in application.properties.
-// this service-> https://gcloud-ms-users-axxh6chama-wl.a.run.app
+// gCloud-> https://gcloud-ms-users-axxh6chama-wl.a.run.app
+// locally: server.port=${port:8082}
 // try-catch => https://www.w3schools.com/java/java_try_catch.asp
 // Use for testing => '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","role":"User","Cmd":"getAll","DestSrv":"UserSrv"}'
 @RestController

@@ -9,9 +9,7 @@ import com.example.gcloud_ms_api.utility.ResponseHelper;
 import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.MovieMessage;
 import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
-import com.example.gcloud_ms_users.user.messages.UserMessage;
 import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.stream.StreamSupport;
 
+// gCloud: https://gcloud-ms-api-axxh6chama-wl.a.run.app
+// Locally: server.port=${port:8084}
 // Get the request/response objects using @RequestMapping
 // Note: Testing shows the request/response objects also map with @PostMapping.
 // https://stackoverflow.com/questions/4564465/spring-controller-get-request-response
@@ -41,15 +40,23 @@ public class IndexRestController
     }
 
     @PostMapping("/usersGet") // in: path
-    public void UserGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontUsers users) // HttpServletResponse response ApiFrontUsers
+    public void UserGetRouter(HttpServletResponse srvResponse, @RequestBody String users) // ApiFrontUsers
     {
         System.out.println("API:[IRC.UserGetRouter] Start");
 
-        // Pass: Tested conversion to ApiFrontUsers
-        //ApiFrontUsers result = OMHelper.Convert(users, ApiFrontUsers.class);
-        //System.out.println("TESTING: result= " + result.get_id());
-
-        userCtrl.GetAllAction(srvResponse, users);
+        try
+        {
+            // Pass: Tested conversion to ApiFrontUsers
+            ApiFrontUsers usersResult = OMHelper.Convert(users, ApiFrontUsers.class);
+            System.out.println("Convert Json String Successfully");
+            userCtrl.GetAllAction(srvResponse, usersResult);
+        }
+        catch(Exception e)
+        {
+            System.out.println("API:[IRC.UserGetRouter] Error=" + e.getMessage());
+            ResponseHelper.Write(srvResponse, "Error Occurred during JSON Convert.");
+            srvResponse.setStatus(500);
+        }
     }
 
     @PostMapping("/usersPost") // in: path

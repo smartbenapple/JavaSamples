@@ -90,6 +90,7 @@ public class Connect
 
         String url = "https://gcloud-innerconnect-axxh6chama-wl.a.run.app/" + path;
         String url2 = "http://localhost:8181/" + path; // sendmeNewmovie or sendmeNewuser or sendme
+        System.out.println("Api:[Connect.SendData] url=" + url);
 
         RestClient rest = RestClient.create();
 
@@ -101,7 +102,7 @@ public class Connect
 
         // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
-                .uri(url2)
+                .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)

@@ -96,22 +96,22 @@ public class Innerconnect
             {
                 case "MovieSrv": // Send to Java Movie service
                     System.out.println("IC:[Innerconnect.watchQueues] MovieSrv");
-                    item.set_host("localhost"); // gcloud-ms-movies-axxh6chama-wl.a.run.app
-                    item.set_port("8081");
+                    item.set_host("gcloud-ms-movies-axxh6chama-wl.a.run.app"); // gcloud-ms-movies-axxh6chama-wl.a.run.app
+                    item.set_port(""); // was:8081
                     item.set_path(Objects.equals(item.get_cmd(), "create") ? "/movieCreate" : "/movies");
                     SendData(item);
                     break;
                 case "UserSrv": // Send to Java User service
                     System.out.println("IC:[Innerconnect.watchQueues] UserSrv");
-                    item.set_host("localhost"); // gcloud-ms-users-axxh6chama-wl.a.run.app
-                    item.set_port("8082");
+                    item.set_host("gcloud-ms-users-axxh6chama-wl.a.run.app"); // gcloud-ms-users-axxh6chama-wl.a.run.app
+                    item.set_port(""); // was:8082
                     item.set_path(Objects.equals(item.get_cmd(), "create") ? "/userCreate" : "/users");
                     SendData(item);
                     break;
                 case "ApiSrv": // Send to API service
                     System.out.println("IC:[Innerconnect.watchQueues] ApiSrv");
-                    item.set_host("localhost"); // gcloud-ms-api-axxh6chama-wl.a.run.app
-                    item.set_port("8080");
+                    item.set_host("gcloud-ms-api-axxh6chama-wl.a.run.app"); //
+                    item.set_port(""); // was:8080
                     item.set_path(item.get_path()); // was: "/sendme" - now can be different paths for users/movies answers.
                     SendData(item);
                     break;

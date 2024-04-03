@@ -28,7 +28,7 @@ public class ApiFrontUsers
     }
 
     @JsonCreator
-    public ApiFrontUsers(@JsonProperty("id") String id, @JsonProperty("data") String data, @JsonProperty("path") String path) // UserMessage
+    public ApiFrontUsers(@JsonProperty("id") String id, @JsonProperty("data_username") String username, @JsonProperty("data_password") String password, @JsonProperty("path") String path) // UserMessage
     {
         _id = id;
         _path = path;
@@ -36,7 +36,7 @@ public class ApiFrontUsers
         try
         {
             // Pass: Tested conversion to UserMessage
-            UserMessage userMessage = OMHelper.Convert(data, UserMessage.class);
+            UserMessage userMessage = new UserMessage(username,password); //OMHelper.Convert(username, UserMessage.class);
             _data = userMessage;
         }
         catch(Exception e)

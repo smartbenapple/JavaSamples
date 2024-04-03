@@ -2,6 +2,7 @@ package com.example.gcloud_ms_api.user;
 
 import com.example.gcloud_ms_api.communication.Connect;
 import com.example.gcloud_ms_api.messages.ApiFrontUsers;
+import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_api.utility.ResponseHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import jakarta.servlet.ServletResponse;
@@ -21,6 +22,10 @@ public class Controller
     {
         try
         {
+            // Output users Json
+            String usersStg = OMHelper.Parse(users);
+            System.out.println("API:[Users:Ctrl.GetAllAction] Users=" + usersStg);
+
             // Java: Use Consumer as function callback
             /*Consumer<String> work = (name) ->
             {

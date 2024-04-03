@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-// this service: https://gcloud-ms-innerconnect-axxh6chama-wl.a.run.app
+// gCloud: https://gcloud-ms-movies-axxh6chama-wl.a.run.app
+// locally: server.port=${port:8081}
 @RestController
 public class IndexRestController
 {
