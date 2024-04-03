@@ -88,7 +88,7 @@ public class Connect
     {
         System.out.println("Api:[Connect.SendData] Start");
 
-        String url = "https://gcloud-innerconnect-axxh6chama-wl.a.run.app/" + path;
+        String url = "https://gcloud-ms-innerconnect-axxh6chama-wl.a.run.app" + path;
         String url2 = "http://localhost:8181/" + path; // sendmeNewmovie or sendmeNewuser or sendme
         System.out.println("Api:[Connect.SendData] url=" + url);
 
