@@ -1,15 +1,18 @@
 package com.example.gcloud_ms_api.messages;
 
+import com.example.gcloud_ms_api.utility.OMHelper;
+import com.example.gcloud_ms_movies.messages.MovieMessage;
+import com.example.gcloud_ms_users.user.messages.UserMessage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ApiFrontMovies
 {
     private String _id;
-    private String _data; // todo: change to movies message
+    private MovieMessage _data;
     private String _path;
 
-    public String get_data()
+    public MovieMessage get_data()
     {
         return _data;
     }
@@ -28,7 +31,17 @@ public class ApiFrontMovies
     public ApiFrontMovies(@JsonProperty("id") String id, @JsonProperty("data") String data, @JsonProperty("path") String path)
     {
         _id = id;
-        _data = data;
         _path = path;
+
+        try
+        {
+            // Pass: Tested conversion to MovieMessage
+            MovieMessage movieMessage = OMHelper.Convert(data, MovieMessage.class);
+            _data = movieMessage;
+        }
+        catch(Exception e)
+        {
+            System.out.println("API[ApiFrontMovies.ctr] Crash on conversion of 'data'; Error =" + e.getMessage());
+        }
     }
 }

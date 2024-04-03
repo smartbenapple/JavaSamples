@@ -3,6 +3,7 @@ package com.example.gcloud_ms_api.movie;
 import com.example.gcloud_ms_api.communication.Connect;
 import com.example.gcloud_ms_api.messages.ApiFrontMovies;
 import com.example.gcloud_ms_api.movie.Model;
+import com.example.gcloud_ms_api.utility.ResponseHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import jakarta.servlet.ServletResponse;
 
@@ -33,20 +34,21 @@ public class Controller
         }
         catch(Exception e)
         {
-            System.out.println("Api:[Controller.GetAllAction] Error=" + e.getMessage());
+            System.out.println("Api:[Movie:Controller.GetAllAction] Error=" + e.getMessage());
             //response.setStatus(500);
         }
     }
 
-    public void CreateAction()
+    public void CreateAction(ServletResponse response, ApiFrontMovies movies)
     {
         try
         {
-
+            IcMessage message = model.Create(movies);
+            ResponseHelper.Write(response, "Success");
         }
         catch(Exception e)
         {
-            System.out.println("Api:[Controller.CreateAction]");
+            System.out.println("Api:[Movie:Controller.CreateAction]");
         }
     }
 }

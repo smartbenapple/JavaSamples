@@ -93,21 +93,23 @@ public class IndexRestController
 
     @PostMapping("/moviesPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
-    public void movieRouter(@RequestBody ApiFrontMovies body, HttpServletRequest request, HttpServletResponse response) throws IOException
+    public void movieRouter(@RequestBody ApiFrontMovies body, HttpServletRequest request, HttpServletResponse response) throws IOException // ApiFrontMovies
     {
         System.out.println("API:[IRC.UserRouter] Start");
 
         try
         {
-            // Pass: Tested conversion to ApiFrontUsers
-            //ApiFrontUsers users = OMHelper.Convert(body, ApiFrontUsers.class);
-            //System.out.println("TESTING: result= " + users.get_id());
+            // Pass: Tested conversion to ApiFrontMovies
+            //ApiFrontMovies movies = OMHelper.Convert(body, ApiFrontMovies.class);
+            //System.out.println("TESTING: result= " + movies.get_id());
 
             // Pass: Tested OmHelper.Convert.
             /*UserMessage users = new UserMessage("john","123");
             String usersData = OMHelper.Parse(users);
             UserMessage result = OMHelper.Convert(usersData, UserMessage.class);
             System.out.println("TESTING: result= " + result.get_password());*/
+
+            movieCtrl.CreateAction(response, body);
         }
         catch(Exception e)
         {

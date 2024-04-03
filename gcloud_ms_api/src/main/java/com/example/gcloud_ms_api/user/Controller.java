@@ -36,7 +36,7 @@ public class Controller
         }
         catch(Exception e)
         {
-            System.out.println("Api:[Controller.GetAllAction] Error=" + e.getMessage());
+            System.out.println("Api:[User:Controller.GetAllAction] Error=" + e.getMessage());
             //response.setStatus(500);
         }
     }
@@ -50,7 +50,7 @@ public class Controller
         }
         catch(Exception e)
         {
-            System.out.println("Api:[Controller.CreateAction] Error=" + e.getMessage());
+            System.out.println("Api:[User:Controller.CreateAction] Error=" + e.getMessage());
         }
     }
 }
