@@ -30,6 +30,8 @@ public class ApiFrontMovies
     @JsonCreator
     public ApiFrontMovies(@JsonProperty("id") String id, @JsonProperty("data") String data, @JsonProperty("path") String path)
     {
+        System.out.println("API:[ApiFrontMovies.ctr] id=" + id + ",data=" + data + ",path=" + path);
+
         _id = id;
         _path = path;
 

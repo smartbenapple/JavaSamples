@@ -6,23 +6,19 @@ import com.example.gcloud_ms_api.messages.ApiFrontUsers;
 import com.example.gcloud_ms_api.user.Controller;
 import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_api.utility.ResponseHelper;
-import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
-import com.example.gcloud_ms_movies.messages.MovieMessage;
-import com.example.gcloud_ms_users.user.messages.IcAnsUsrMessage;
-import com.example.gcloud_ms_users.user.messages.UsersFirebaseMessage;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 // gCloud: https://gcloud-ms-api-axxh6chama-wl.a.run.app
 // Locally: server.port=${port:8084}
+// Cors => https://spring.io/guides/gs/rest-service-cors
+//    Use:  @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
 // Get the request/response objects using @RequestMapping
 // Note: Testing shows the request/response objects also map with @PostMapping.
 // https://stackoverflow.com/questions/4564465/spring-controller-get-request-response
@@ -39,6 +35,7 @@ public class IndexRestController
     {
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/usersGet") // in: path
     public void UserGetRouter(HttpServletResponse srvResponse, @RequestBody String users) // ApiFrontUsers
     {
@@ -59,6 +56,7 @@ public class IndexRestController
         }
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/usersPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void UserRouter(@RequestBody ApiFrontUsers body, HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -90,6 +88,7 @@ public class IndexRestController
         // todo: create call
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/moviesGet") // in: path
     public void MovieGetRouter(ServletRequest servletRequest, ServletResponse srvResponse, @RequestBody ApiFrontMovies movies)
     {
@@ -98,6 +97,7 @@ public class IndexRestController
         movieCtrl.GetAllAction(srvResponse, movies);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/moviesPost") // in: path
     //@RequestMapping(value = "/users", method = RequestMethod.POST)
     public void movieRouter(@RequestBody ApiFrontMovies body, HttpServletRequest request, HttpServletResponse response) throws IOException // ApiFrontMovies
@@ -132,7 +132,8 @@ public class IndexRestController
         // todo: create call
     }
 
-    @PostMapping("/sendmeUsers") // in: path
+    // Note: Use API-Front
+    /*@PostMapping("/sendmeUsers") // in: path
     public void SendmeUsersRouter(@RequestBody IcAnsUsrMessage icAnsUsrMessage)
     {
         System.out.println("API:[IRC.SendmeUsersRouter] Start");
@@ -141,7 +142,7 @@ public class IndexRestController
         String id = icAnsUsrMessage.get_id();
         UsersFirebaseMessage data = icAnsUsrMessage.get_usersFirebaseMessage();
         String jsonData = OMHelper.Parse(data);
-        //connect.RegistryHandler(id, jsonData); // todo: fix
+        //connect.RegistryHandler(id, jsonData);
     }
 
     @PostMapping("/sendmeMovies") // in: path
@@ -153,6 +154,6 @@ public class IndexRestController
         String id = icAnsMoviesMessage.get_id();
         MovieMessage[] data = icAnsMoviesMessage.get_movies();
         String jsonData = OMHelper.Parse(data);
-        //connect.RegistryHandler(id, jsonData); // todo: fix
-    }
+        //connect.RegistryHandler(id, jsonData);
+    }*/
 }

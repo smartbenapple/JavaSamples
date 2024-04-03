@@ -4,19 +4,26 @@ import com.example.gcloud_ms_users.user.Controller;
 
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-// gCloud-> https://gcloud-ms-users-axxh6chama-wl.a.run.app
+// gCloud => https://gcloud-ms-users-axxh6chama-wl.a.run.app
 // locally: server.port=${port:8082}
 // try-catch => https://www.w3schools.com/java/java_try_catch.asp
-// Use for testing => '{"Host":"localhost","Port":"8080","Path":"/users","Id":"99","role":"User","Cmd":"getAll","DestSrv":"UserSrv"}'
+// Cors => https://spring.io/guides/gs/rest-service-cors
+//    Use:  @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
+// Use for testing => '{"host":"localhost","port":"8080","path":"/users","id":"99","role":"user","cmd":"getAll","destSrv":"UserSrv"}'
 @RestController
 public class IndexRestController
 {
     Controller ctrl = new Controller();
 
+    @GetMapping("/talktome")
+    public String TalkToMeTest()
+    {
+        return "Hello Civilian...";
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/users") // in: maps path
     public String ProcessAction(@RequestBody IcMessage icMessage)
     {
@@ -33,6 +40,7 @@ public class IndexRestController
         return "Post Users Worked.";
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/userCreate") // in: maps path
     public String ProcessCreate(@RequestBody IcNewUsrMessage icNewUsrMessage)
     {

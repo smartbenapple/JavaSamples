@@ -30,6 +30,8 @@ public class ApiFrontUsers
     @JsonCreator
     public ApiFrontUsers(@JsonProperty("id") String id, @JsonProperty("data_username") String username, @JsonProperty("data_password") String password, @JsonProperty("path") String path) // UserMessage
     {
+        System.out.println("API:[ApiFrontUsers.ctr] id=" + id + ",username=" + username + ",password=" + password + ",path=" + path);
+
         _id = id;
         _path = path;
 

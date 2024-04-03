@@ -5,6 +5,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
+import java.util.function.Consumer;
+
 public class Connect
 {
     private static Connect _singleton;
@@ -94,18 +96,21 @@ public class Connect
 
         RestClient rest = RestClient.create();
 
-        // Failed: Test creating headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        // Possible-Pass: Setup a Consumer<HttpHeaders> callback
+        Consumer<HttpHeaders> headersWork = (headers) ->
+        {
+            System.out.println("IC:[Innerconnect.RunSendData.Consumer<HttpHeaders>] triggered.");
+            headers.add("Access-Control-Allow-Origin","*");
+            headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+            headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        };
 
         // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                //.headers((Consumer<HttpHeaders>) headers)
+                .headers(headersWork)
                 .body(message)
                 .retrieve()
                 .toBodilessEntity());

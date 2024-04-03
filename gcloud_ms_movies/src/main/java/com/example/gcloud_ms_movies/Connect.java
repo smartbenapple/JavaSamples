@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
+import java.util.function.Consumer;
+
 public class Connect
 {
     // Springs: RestClient
@@ -17,24 +19,27 @@ public class Connect
     {
         System.out.println("Movies:[Connect.GetMoviesData] Start...");
 
-        String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8383/movies";
+        String url = "https://glcoud-ms-movies-firebase-axxh6chama-wl.a.run.app/movies";
+        //String url2 = "http://localhost:8383/movies";
 
         RestClient rest = RestClient.create();
 
-        // Failed: Test creating headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        // Possible-Pass: Setup a Consumer<HttpHeaders> callback
+        Consumer<HttpHeaders> headersWork = (headers) ->
+        {
+            System.out.println("IC:[Innerconnect.RunSendData.Consumer<HttpHeaders>] triggered.");
+            headers.add("Access-Control-Allow-Origin","*");
+            headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+            headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        };
 
         // Expect to receive: {"message":"success"}
         // Firebase NodeJs service will send answer directly to innerconnect.
         String result = String.valueOf(rest.post()
-                .uri(url2)
+                .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                //.headers((Consumer<HttpHeaders>) headers)
+                .headers(headersWork)
                 .body(icMessage)
                 .retrieve()
                 .toBodilessEntity());
@@ -58,18 +63,21 @@ public class Connect
 
         RestClient rest = RestClient.create();
 
-        // Failed: Test creating headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        // Possible-Pass: Setup a Consumer<HttpHeaders> callback
+        Consumer<HttpHeaders> headersWork = (headers) ->
+        {
+            System.out.println("IC:[Innerconnect.RunSendData.Consumer<HttpHeaders>] triggered.");
+            headers.add("Access-Control-Allow-Origin","*");
+            headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+            headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        };
 
         // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
                 .uri(url2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                //.headers((Consumer<HttpHeaders>) headers)
+                .headers(headersWork)
                 .body(moviesFirebaseMessage)
                 .retrieve()
                 .toBodilessEntity());
@@ -82,24 +90,27 @@ public class Connect
     {
         System.out.println("Movies:[Connect.CreateMovie] Start");
 
-        String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8383/movies";
+        String url = "https://glcoud-ms-movies-firebase-axxh6chama-wl.a.run.app/movies";
+        //String url2 = "http://localhost:8383/movies";
 
         RestClient rest = RestClient.create();
 
-        // Failed: Test creating headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        // Possible-Pass: Setup a Consumer<HttpHeaders> callback
+        Consumer<HttpHeaders> headersWork = (headers) ->
+        {
+            System.out.println("IC:[Innerconnect.RunSendData.Consumer<HttpHeaders>] triggered.");
+            headers.add("Access-Control-Allow-Origin","*");
+            headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+            headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        };
 
         // Expect to receive: {"message":"success"}
         // Firebase NodeJs service will send answer directly to innerconnect.
         String result = String.valueOf(rest.post()
-                .uri(url2)
+                .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                //.headers((Consumer<HttpHeaders>) headers)
+                .headers(headersWork)
                 .body(icNewMovieMessage)
                 .retrieve()
                 .toBodilessEntity());

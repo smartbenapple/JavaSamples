@@ -15,13 +15,13 @@ public class Innerconnect
 {
     // Atomic Thread-Safe value-types
     // https://www.tutorialspoint.com/java_concurrency/concurrency_atomicboolean.htm
-    AtomicBoolean safeBool = new AtomicBoolean(false);
+    //AtomicBoolean safeBool = new AtomicBoolean(false);
 
     ArrayList<IcMessage> items = new ArrayList<IcMessage>();
 
     public Innerconnect()
     {
-        WatchAtomic();
+        //WatchAtomic();
     }
 
     public String AddData(IcMessage innerConnectMessage)
@@ -37,16 +37,18 @@ public class Innerconnect
         System.out.println("IC:[Innerconnect.SendData] Start");
 
         // reset Atomic value
-        safeBool.set(false);
+        //safeBool.set(false);
 
+        // TODO: remove thread call for testing - Results: It appears the thread context does interfere with sending wire data.
+        RunSendData(innerConnectMessage);
         // Run Consumer work through ThreadHelper
-        Consumer<String> work = (name) ->
+        /*Consumer<String> work = (name) ->
                 {
                     System.out.println("IC:[Innerconnect.SendData.ConsumerWork] Consumer work start.");
                     RunSendData(innerConnectMessage);
-                    safeBool.set(true);
+                    //safeBool.set(true);
                 };
-        ThreadHelper.Async(work, "empty");
+        ThreadHelper.Async(work, "empty");*/
 
         System.out.println("IC:[Innerconnect.SendData] Innerconnect exit.");
     }
@@ -59,18 +61,21 @@ public class Innerconnect
 
         RestClient rest = RestClient.create();
 
-        // Failed: Test creating headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-        headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        // Possible-Pass: Setup a Consumer<HttpHeaders> callback
+        Consumer<HttpHeaders> headersWork = (headers) ->
+        {
+            System.out.println("IC:[Innerconnect.RunSendData.Consumer<HttpHeaders>] triggered.");
+            headers.add("Access-Control-Allow-Origin","*");
+            headers.add("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+            headers.add("Access-Control-Allow-Methods","GET, POST, PUT, DELETE");
+        };
 
         // TODO: Add a promise like wrapper around this call to test async.
         String result = String.valueOf(rest.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                //.headers((Consumer<HttpHeaders>) headers)
+                .headers(headersWork)
                 .body(innerConnectMessage)
                 .retrieve()
                 .toBodilessEntity());
@@ -109,16 +114,17 @@ public class Innerconnect
                     break;
                 case "ApiSrv": // Send to API service
                     System.out.println("IC:[Innerconnect.watchQueues] ApiSrv");
-                    item.set_host("gcloud-ms-api-axxh6chama-wl.a.run.app"); //
+                    item.set_host("gcloud-ms-api-front-axxh6chama-wl.a.run.app"); // gcloud-ms-api-front-axxh6chama-wl.a.run.app
                     item.set_port(""); // was:8080
                     item.set_path(item.get_path()); // was: "/sendme" - now can be different paths for users/movies answers.
                     SendData(item);
                     break;
             }
+            System.out.println("IC:[Innerconnect.watchQueues] url=https://" + item.get_host() + "/" + item.get_path());
         }
     }
 
-    public void WatchAtomic()
+   /* public void WatchAtomic()
     {
         new Thread(new Runnable()
         {
@@ -141,5 +147,5 @@ public class Innerconnect
                 }
             }
         }).start();
-    }
+    }*/
 }
