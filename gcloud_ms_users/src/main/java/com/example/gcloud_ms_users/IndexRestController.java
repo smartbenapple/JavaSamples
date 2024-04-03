@@ -22,12 +22,12 @@ public class IndexRestController
     {
         try
         {
-            //ctrl.CreateMessage();
+            System.out.println("Users:[IRC.ProcessAction] Start");
             ctrl.ProcessAction(icMessage);
         }
         catch(Exception e)
         {
-            System.out.println("[ProcessAction] Error=" + e.getMessage());
+            System.out.println("Users:[IRC.ProcessAction] Error=" + e.getMessage());
             return "Post Users Failed.";
         }
         return "Post Users Worked.";
@@ -38,12 +38,12 @@ public class IndexRestController
     {
         try
         {
-            //ctrl.CreateMessage();
+            System.out.println("Users:[IRC.ProcessCreate] Start");
             ctrl.ProcessAction(icNewUsrMessage);
         }
         catch(Exception e)
         {
-            System.out.println("[ProcessAction] Error=" + e.getMessage());
+            System.out.println("Users:[IRC.ProcessAction] Error=" + e.getMessage());
             return "Post Users Failed.";
         }
         return "Success";

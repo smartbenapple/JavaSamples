@@ -42,18 +42,19 @@ public class Innerconnect
         // Run Consumer work through ThreadHelper
         Consumer<String> work = (name) ->
                 {
+                    System.out.println("IC:[Innerconnect.SendData.ConsumerWork] Consumer work start.");
                     RunSendData(innerConnectMessage);
                     safeBool.set(true);
                 };
-        ThreadHelper.Async(work, null);
+        ThreadHelper.Async(work, "empty");
 
-        System.out.println("Users:[Connect.SendData] Innerconnect exit.");
+        System.out.println("IC:[Innerconnect.SendData] Innerconnect exit.");
     }
 
     private void RunSendData(IcMessage innerConnectMessage)
     {
         String port = innerConnectMessage.get_port().isEmpty() ? "" : ":" + innerConnectMessage.get_port();
-        String url = "http://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
+        String url = "https://" + innerConnectMessage.get_host() + port + innerConnectMessage.get_path();
         System.out.println("IC:[Innerconnect.RunSendData] url=" + url);
 
         RestClient rest = RestClient.create();

@@ -31,7 +31,7 @@ public class Connect
         // Expect to receive: {"message":"success"}
         // Firebase NodeJs service will send answer directly to innerconnect.
         String result = String.valueOf(rest.post()
-                .uri(url2)
+                .uri(url)
                 //.contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)
@@ -61,7 +61,7 @@ public class Connect
         // Expect to receive: {"message":"success"}
         // Firebase NodeJs service will send answer directly to innerconnect.
         String result = String.valueOf(rest.post()
-                .uri(url2)
+                .uri(url)
                 //.contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 //.headers((Consumer<HttpHeaders>) headers)

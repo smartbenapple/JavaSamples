@@ -10,10 +10,8 @@ public class ThreadHelper
     // Java: Use Consumer as function callback
     // Consumer<String> work = (name) ->
     // {
-    //   IcMessage message = model.GetAll();
-    //   // Register respons
-    //   connect.Register(message.get_apiMessage(), response);
-    //  };
+    //      ... Add Code Here ...
+    // };
     //
     //  // Create Message
     //  ThreadHelper.Async(work, null);
