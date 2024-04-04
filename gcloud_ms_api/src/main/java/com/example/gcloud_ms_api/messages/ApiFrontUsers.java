@@ -3,6 +3,7 @@ package com.example.gcloud_ms_api.messages;
 import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_users.user.messages.UserMessage;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.catalina.User;
 
@@ -17,11 +18,13 @@ public class ApiFrontUsers
         return _data;
     }
 
+    @JsonGetter("id")
     public String get_id()
     {
         return _id;
     }
 
+    @JsonGetter("path")
     public String get_path()
     {
         return _path;

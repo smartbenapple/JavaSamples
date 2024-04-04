@@ -39,6 +39,7 @@ public class Model
         // Create the IcNewUserMessage
         String title = movies.get_data().get_title();
         String year = movies.get_data().get_year();
+        System.out.println("API:[User:Model.Create] new-item=" + "title=" + title + ",year=" + year);
         IcNewMovieMessage message = new IcNewMovieMessage(movies.get_id(),"user","create","MovieSrv",title,year);
 
         String output = OMHelper.Parse(message);
