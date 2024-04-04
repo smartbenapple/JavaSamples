@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_innerconnect;
 
+import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_movies.adapters.Adp_MFM_ICM;
 import com.example.gcloud_ms_movies.messages.IcAnsMoviesMessage;
 import com.example.gcloud_ms_movies.messages.IcNewMovieMessage;
@@ -31,7 +32,8 @@ public class IndexRestController
     @PostMapping("/sendme") // in: path
     public String AddData(@RequestBody IcMessage icMessage)
     {
-        System.out.println("IC:[IRC.AddData] Start");
+        String message = OMHelper.Parse(icMessage);
+        System.out.println("IC:[IRC.AddData] Start > message=" + message);
         return connect.AddData(icMessage);
     }
 
@@ -39,7 +41,8 @@ public class IndexRestController
     @PostMapping("/sendmeNewmovie") // in: path
     public String MovieAddData(@RequestBody IcNewMovieMessage icNewMovieMessage)
     {
-        System.out.println("IC:[IRC.MovieAddData] Start");
+        String message = OMHelper.Parse(icNewMovieMessage);
+        System.out.println("IC:[IRC.MovieAddData] Start > message=" + message);
         return connect.AddData(icNewMovieMessage);
     }
 
@@ -47,7 +50,8 @@ public class IndexRestController
     @PostMapping("/sendmeNewuser") // in: path
     public String UserAddData(@RequestBody IcNewUsrMessage icNewUsrMessage)
     {
-        System.out.println("IC:[IRC.UserAddData] Start");
+        String message = OMHelper.Parse(icNewUsrMessage);
+        System.out.println("IC:[IRC.UserAddData] Start > Message=" + message);
         return connect.AddData(icNewUsrMessage);
     }
 

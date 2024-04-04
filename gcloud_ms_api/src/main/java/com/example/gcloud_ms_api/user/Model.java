@@ -38,10 +38,11 @@ public class Model
         // Create the IcNewUserMessage
         String userName = users.get_data().get_userName();
         String password = users.get_data().get_password();
+        System.out.println("API:[User:Model.Create] new-item=" + "username=" + userName + ",password=" + password);
         IcNewUsrMessage message = new IcNewUsrMessage(users.get_id(),"user","create","UserSrv",userName,password);
 
         String output = OMHelper.Parse(message);
-        System.out.println("API[Model.GetAll] message=" + output);
+        System.out.println("API:[User:Model.Create] message=" + output);
 
         // Send to innerconnect service
         // Expects: IcNewUsrMessage
