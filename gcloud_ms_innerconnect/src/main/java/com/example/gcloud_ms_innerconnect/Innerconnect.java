@@ -26,7 +26,8 @@ public class Innerconnect
 
     public String AddData(IcMessage innerConnectMessage)
     {
-        System.out.println("IC:[Innerconnect.AddData] Start = " + innerConnectMessage.toString());
+        String messageOut = OMHelper.Parse(innerConnectMessage);
+        System.out.println("IC:[Innerconnect.AddData] message = " + messageOut);
         items.add(innerConnectMessage);
         WatchQueues();
         return "IC:[Innerconnect.AddData] Add Data Success.";
@@ -34,7 +35,8 @@ public class Innerconnect
 
     public void SendData(IcMessage innerConnectMessage)
     {
-        System.out.println("IC:[Innerconnect.SendData] Start");
+        String messageOut = OMHelper.Parse(innerConnectMessage);
+        System.out.println("IC:[Innerconnect.SendData] message = " + messageOut);
 
         // reset Atomic value
         //safeBool.set(false);
@@ -120,7 +122,7 @@ public class Innerconnect
                     SendData(item);
                     break;
             }
-            System.out.println("IC:[Innerconnect.watchQueues] url=https://" + item.get_host() + "/" + item.get_path());
+            System.out.println("IC:[Innerconnect.watchQueues] url=https://" + item.get_host() + item.get_path());
         }
     }
 

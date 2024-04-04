@@ -1,5 +1,6 @@
 package com.example.gcloud_ms_users.user;
 
+import com.example.gcloud_ms_api.utility.OMHelper;
 import com.example.gcloud_ms_innerconnect.messages.IcMessage;
 import com.example.gcloud_ms_users.user.messages.IcNewUsrMessage;
 import org.springframework.http.HttpHeaders;
@@ -17,10 +18,11 @@ public class Connect
     // Send request to Users_Firebase service.
     public void GetUsersData(IcMessage icMessage)
     {
-        System.out.println("Users:[Connect.GetUsersData] Start...");
+        String messageOut = OMHelper.Parse(icMessage);
+        System.out.println("Users:[Connect.GetUsersData] message=" + messageOut);
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8283/users";
+        //String url2 = "http://localhost:8283/users";
         System.out.println("Users:[Connect.GetUsersData] url=" + url);
 
         RestClient rest = RestClient.create();
@@ -51,10 +53,12 @@ public class Connect
     // Send request to Users_Firebase service.
     public void CreateUser(IcNewUsrMessage icNewUsrMessage)
     {
-        System.out.println("Users:[Connect.CreateUser] Start...");
+        String messageOut = OMHelper.Parse(icNewUsrMessage);
+        System.out.println("Users:[Connect.CreateUser] message=" + messageOut);
 
         String url = "https://gcloud-ms-users-firebase-axxh6chama-wl.a.run.app/users";
-        String url2 = "http://localhost:8283/users";
+        //String url2 = "http://localhost:8283/users";
+        System.out.println("Users:[Connect.CreateUser] url=" + url);
 
         RestClient rest = RestClient.create();
 

@@ -1,6 +1,7 @@
 package com.example.gcloud_ms_innerconnect.messages;
 
 import com.example.gcloud_ms_api.messages.apiMessage;
+import com.example.gcloud_ms_api.utility.OMHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -89,7 +90,7 @@ public class IcMessage
     public IcMessage(@JsonProperty("host") String host, @JsonProperty("port") String port, @JsonProperty("path") String path, @JsonProperty("id") String id,
                      @JsonProperty("role") String role, @JsonProperty("cmd") String cmd, @JsonProperty("destSrv") String destSrv, @JsonProperty("data") String data)
     {
-        System.out.println("[InnerConnectMessage.ctr] Triggered");
+        System.out.println("IC:[ICM.ctr] host=" + host + ",port=" + port + ",path=" + path + ",id=" + id + ",role=" + role + ",cmd=" + cmd + ",destSrv=" + ",data=" + data);
 
         _host = host;
         _port = port;
@@ -99,7 +100,8 @@ public class IcMessage
 
     public IcMessage(apiMessage apiMessage)
     {
-        System.out.println("[InnerConnectMessage.ctr2] Triggered");
+        String messageOut = OMHelper.Parse(apiMessage);
+        System.out.println("IC:[ICM.ctr2] apiMessage=" + messageOut);
 
         _host = "";
         _port = "";
