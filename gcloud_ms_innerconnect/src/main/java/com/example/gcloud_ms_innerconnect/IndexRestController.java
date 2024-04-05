@@ -39,29 +39,29 @@ public class IndexRestController
 
     @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/sendmeNewmovie") // in: path
-    public String MovieAddData(@RequestBody IcNewMovieMessage icNewMovieMessage)
+    public String NewMovieAddData(@RequestBody IcNewMovieMessage icNewMovieMessage)
     {
         String message = OMHelper.Parse(icNewMovieMessage);
-        System.out.println("IC:[IRC.MovieAddData] Start > message=" + message);
+        System.out.println("IC:[IRC.NewMovieAddData] Start > message=" + message);
         return connect.AddData(icNewMovieMessage);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/sendmeNewuser") // in: path
-    public String UserAddData(@RequestBody IcNewUsrMessage icNewUsrMessage)
+    public String NewUserAddData(@RequestBody IcNewUsrMessage icNewUsrMessage)
     {
         String message = OMHelper.Parse(icNewUsrMessage);
-        System.out.println("IC:[IRC.UserAddData] Start > Message=" + message);
+        System.out.println("IC:[IRC.NewUserAddData] Start > Message=" + message);
         return connect.AddData(icNewUsrMessage);
     }
 
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"password":"...","username":"..."}]"}
     @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/usersAnswer")
-    public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
+    public String UserAnsAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
     {
         String message = OMHelper.Parse(usersFirebaseModel);
-        System.out.println("IC:[IRC.UserAddData] Start > Message=" + message);
+        System.out.println("IC:[IRC.UserAnsAddData] Start > Message=" + message);
 
         Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);
         IcAnsUsrMessage object = adapter.Output();
@@ -72,10 +72,10 @@ public class IndexRestController
     // Expect to receive: {"id":"", "destSrv":"","data":"[{"title":"...","year":"..."}]"}
     @CrossOrigin(origins = "*", allowedHeaders = "Origin, X-Requested-With, Content-Type, Accept",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
     @PostMapping("/moviesAnswer")
-    public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
+    public String MoviesAnsAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
         String message = OMHelper.Parse(moviesFirebaseMessage);
-        System.out.println("IC:[IRC.MoviesAddData] Start > Message=" + message);
+        System.out.println("IC:[IRC.MoviesAnsAddData] Start > Message=" + message);
 
         Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
         IcAnsMoviesMessage object = adapter.Output();
