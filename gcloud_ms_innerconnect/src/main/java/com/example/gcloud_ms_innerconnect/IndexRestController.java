@@ -60,7 +60,8 @@ public class IndexRestController
     @PostMapping("/usersAnswer")
     public String UserAddData(@RequestBody UsersFirebaseMessage usersFirebaseModel)
     {
-        System.out.println("IC:[IRC.UserAddData] Start");
+        String message = OMHelper.Parse(usersFirebaseModel);
+        System.out.println("IC:[IRC.UserAddData] Start > Message=" + message);
 
         Adp_UFM_ICM adapter = new Adp_UFM_ICM(usersFirebaseModel);
         IcAnsUsrMessage object = adapter.Output();
@@ -73,7 +74,8 @@ public class IndexRestController
     @PostMapping("/moviesAnswer")
     public String MoviesAddData(@RequestBody MoviesFirebaseMessage moviesFirebaseMessage) // MoviesFirebaseMessage moviesFirebaseMessage
     {
-        System.out.println("IC:[IRC.MoviesAddData] Start");
+        String message = OMHelper.Parse(moviesFirebaseMessage);
+        System.out.println("IC:[IRC.MoviesAddData] Start > Message=" + message);
 
         Adp_MFM_ICM adapter = new Adp_MFM_ICM(moviesFirebaseMessage);
         IcAnsMoviesMessage object = adapter.Output();

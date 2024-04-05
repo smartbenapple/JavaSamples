@@ -9,7 +9,7 @@ public class Adp_UFM_ICM
 
     public Adp_UFM_ICM(UsersFirebaseMessage usersFirebaseModel)
     {
-        _icAnsUsrMessage = new IcAnsUsrMessage("","","",usersFirebaseModel.get_id(),"","",usersFirebaseModel.get_destSrv(), usersFirebaseModel);
+        _icAnsUsrMessage = new IcAnsUsrMessage(usersFirebaseModel.get_id(),usersFirebaseModel.get_destSrv(), usersFirebaseModel.Users());
     }
 
     public IcAnsUsrMessage Output()
